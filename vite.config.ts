@@ -56,5 +56,13 @@
     server: {
       port: 3000,
       open: true,
+      proxy: {
+        // Proxy /api to backend during development. Keep base URL as '/api' in frontend if you prefer proxying.
+        '/api': {
+          target: 'http://localhost:5000',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '/api'),
+        },
+      },
     },
   });
