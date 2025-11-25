@@ -1,0 +1,5 @@
+- [ ] Fix import statement: change UseEffect to useEffect
+- [ ] Fix import spacing: add space after Badge
+- [ ] Fix state declarations: add spaces in useState destructuring
+- [ ] Fix first useEffect: call LoadAlerts()
+- [ ] Fix JSX className: make it a proper template string
