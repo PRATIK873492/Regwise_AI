@@ -13,7 +13,10 @@ export const COUNTRIES: Country[] = [
   { id: '10', code: 'AE', name: 'United Arab Emirates', region: 'Middle East' },
 ];
 
-export const API_BASE_URL = 'http://localhost:8000';
+// Read API base URL from Vite environment variable `VITE_API_BASE_URL`.
+// Set this in an `.env` or `.env.local` file at project root, e.g.:
+// VITE_API_BASE_URL="https://api.example.com"
+export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string) || 'http://localhost:8000';
 
 export const ROUTES = {
   HOME: '/',
