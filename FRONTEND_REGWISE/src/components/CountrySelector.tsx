@@ -1,34 +1,33 @@
-import { useApp } from '../context/AppContext';
-import { COUNTRIES } from '../utils/constants';
+import { useApp } from "../context/AppContext";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
-import { Globe } from 'lucide-react';
+} from "./ui/select";
+import { Globe } from "lucide-react";
 
 interface CountrySelectorProps {
-  variant?: 'default' | 'compact';
+  variant?: "default" | "compact";
   className?: string;
 }
 
-export const CountrySelector: React.FC<CountrySelectorProps> = ({ 
-  variant = 'default',
-  className = '' 
+export const CountrySelector: React.FC<CountrySelectorProps> = ({
+  variant = "default",
+  className = "",
 }) => {
-  const { selectedCountry, setSelectedCountry } = useApp();
+  const { selectedCountry, setSelectedCountry, countries } = useApp();
 
   const handleCountryChange = (countryId: string) => {
-    const country = COUNTRIES.find((c) => c.id === countryId);
+    const country = countries.find((c) => c.id === countryId);
     setSelectedCountry(country || null);
   };
 
-  if (variant === 'compact') {
+  if (variant === "compact") {
     return (
       <Select
-        value={selectedCountry?.id || ''}
+        value={selectedCountry?.id || ""}
         onValueChange={handleCountryChange}
       >
         <SelectTrigger className={`w-[180px] ${className}`}>
@@ -38,7 +37,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
           </div>
         </SelectTrigger>
         <SelectContent>
-          {COUNTRIES.map((country) => (
+          {countries.map((country) => (
             <SelectItem key={country.id} value={country.id}>
               {country.code} - {country.name}
             </SelectItem>
@@ -55,14 +54,14 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
         <span>Select Country</span>
       </label>
       <Select
-        value={selectedCountry?.id || ''}
+        value={selectedCountry?.id || ""}
         onValueChange={handleCountryChange}
       >
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Choose a country to explore" />
         </SelectTrigger>
         <SelectContent>
-          {COUNTRIES.map((country) => (
+          {countries.map((country) => (
             <SelectItem key={country.id} value={country.id}>
               <div className="flex items-center justify-between w-full">
                 <span>{country.name}</span>
@@ -73,9 +72,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
         </SelectContent>
       </Select>
       {selectedCountry && (
-        <p className="text-gray-600">
-          Region: {selectedCountry.region}
-        </p>
+        <p className="text-gray-600">Region: {selectedCountry.region}</p>
       )}
     </div>
   );

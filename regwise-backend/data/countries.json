@@ -1,0 +1,1469 @@
+[
+  {
+    "id": "AM",
+    "code": "AM",
+    "name": "Armenia",
+    "region": "Asia",
+    "regulators": ["Central Bank of Armenia"],
+    "laws": ["Law on Combating Money Laundering and Terrorism Financing"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect full legal name and national ID",
+        "Verify identity via national eID or passport",
+        "Capture purpose of account and expected activity"
+      ],
+      "documents": ["Passport / National ID", "Proof of Address", "Source of Funds declaration"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Beneficial owner identification for entities",
+        "Adverse media checks"
+      ],
+      "risk_scoring": [
+        "Assign risk band based on customer type and industry",
+        "EDD for non-resident clients and cash-heavy industries"
+      ],
+      "reporting": ["STR filing to Financial Monitoring Center", "Record retention 5 years"],
+      "ongoing_monitoring": [
+        "Periodic re-screening of sanctions/PEP lists",
+        "Transaction monitoring for unusual patterns"
+      ]
+    }
+  },
+  {
+    "id": "AZ",
+    "code": "AZ",
+    "name": "Azerbaijan",
+    "region": "Asia",
+    "regulators": ["Central Bank of Azerbaijan", "Financial Monitoring Service"],
+    "laws": ["Law on Combating Legalization of Criminally Obtained Funds"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport details",
+        "Verify identity via government e-services where available",
+        "Establish account purpose and expected transaction profile"
+      ],
+      "documents": ["Passport / ID", "Proof of Address", "Company registration for corporate customers"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "UBO verification for corporate accounts",
+        "High-risk jurisdiction screening"
+      ],
+      "risk_scoring": [
+        "Risk assignment using industry + geography",
+        "EDD for politically exposed persons and complex ownership"
+      ],
+      "reporting": ["File STRs with Financial Monitoring Service", "Maintain CDD records for 5 years"],
+      "ongoing_monitoring": [
+        "Automated transaction threshold alerts",
+        "Annual review for medium/high-risk clients"
+      ]
+    }
+  },
+  {
+    "id": "BH",
+    "code": "BH",
+    "name": "Bahrain",
+    "region": "Asia",
+    "regulators": ["Central Bank of Bahrain (CBB)"],
+    "laws": ["Anti-Money Laundering and Counter Financing of Terrorism Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity with passport / national ID",
+        "Collect employment and source-of-funds information",
+        "Screen client against CBB & international lists"
+      ],
+      "documents": ["Passport/National ID", "Proof of Address", "Source of Wealth documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Enhanced checks for real estate and jewelry traders",
+        "Cross-border flow monitoring"
+      ],
+      "risk_scoring": [
+        "Assign CBB-style risk categories",
+        "EDD for non-face-to-face onboarding and high-value accounts"
+      ],
+      "reporting": ["STRs to National AML Unit", "Retain records 5–7 years"],
+      "ongoing_monitoring": [
+        "Daily sanctions re-screening",
+        "Monthly high-risk portfolio review"
+      ]
+    }
+  },
+  {
+    "id": "CY",
+    "code": "CY",
+    "name": "Cyprus",
+    "region": "Europe",
+    "regulators": ["Central Bank of Cyprus", "Unit for Combating Money Laundering (MOKAS)"],
+    "laws": ["Prevention and Suppression of Money Laundering Laws"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect identity and address details",
+        "Verify identity via passport or ID card",
+        "Identify beneficial owners for legal entities"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Company UBO documentation"],
+      "aml_checks": [
+        "EU sanctions & PEP screening",
+        "Adverse media checks",
+        "Monitoring for cross-border fund transfers"
+      ],
+      "risk_scoring": [
+        "EU-style risk categorization",
+        "EDD for offshore structures and non-resident clients"
+      ],
+      "reporting": ["Report suspicious activity to MOKAS", "Maintain records for 5 years"],
+      "ongoing_monitoring": [
+        "Periodic KYC refresh based on risk",
+        "Automated transaction anomaly detection"
+      ]
+    }
+  },
+  {
+    "id": "GE",
+    "code": "GE",
+    "name": "Georgia",
+    "region": "Europe/Asia",
+    "regulators": ["National Bank of Georgia", "Financial Monitoring Service"],
+    "laws": ["Law on State Regulation of Financial Activities and AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID and verify via registry",
+        "Capture expected transactional behavior",
+        "Assess beneficial owners for companies"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Company registration documents"],
+      "aml_checks": [
+        "PEP/sanctions screening",
+        "UBO checks",
+        "Enhanced checks for cash-intensive sectors"
+      ],
+      "risk_scoring": [
+        "Assign risk based on residency and business type",
+        "Auto-EDD triggers for shell/opaque entities"
+      ],
+      "reporting": ["STR filing to Financial Monitoring Service", "Record retention 6 years"],
+      "ongoing_monitoring": [
+        "Regular sanctions list updates",
+        "Transaction monitoring with anomaly scoring"
+      ]
+    }
+  },
+  {
+    "id": "IQ",
+    "code": "IQ",
+    "name": "Iraq",
+    "region": "Asia",
+    "regulators": ["Central Bank of Iraq", "Financial Information Unit"],
+    "laws": ["AML/CFT law and implementing regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport details",
+        "Verify identity with government records where possible",
+        "Record occupation and business purpose"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration documents"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Cross-border payment screening",
+        "Enhanced checks for cash or commodity trades"
+      ],
+      "risk_scoring": [
+        "Country risk overlay + customer profile",
+        "EDD for cross-border traders and politically exposed persons"
+      ],
+      "reporting": ["STRs to the Financial Information Unit", "Record retention per national rules"],
+      "ongoing_monitoring": [
+        "Manual review of flagged transactions",
+        "Periodic KYC validation for ongoing relationships"
+      ]
+    }
+  },
+  {
+    "id": "IL",
+    "code": "IL",
+    "name": "Israel",
+    "region": "Asia",
+    "regulators": [
+      "Israel Money Laundering and Terror Financing Prohibition Authority (IMPA)",
+      "Bank of Israel"
+    ],
+    "laws": ["Law for Prevention of Money Laundering and Terror Financing"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via passport/Teudat Zehut",
+        "Obtain national ID numbers and tax residency",
+        "Screen for PEP/terrorist lists"
+      ],
+      "documents": ["ID/Passport", "Proof of Address", "TIN/Tax documentation"],
+      "aml_checks": [
+        "Domestic and international sanctions screening",
+        "Adverse media & negative press checks",
+        "UBO checks for corporate customers"
+      ],
+      "risk_scoring": ["Assign risk using IMPA guidance", "EDD for fintechs, crypto-related business"],
+      "reporting": ["Report suspicious transactions to IMPA", "Maintain records 7 years"],
+      "ongoing_monitoring": ["Automated re-screening of sanctions/PEP lists", "Transaction behaviour analytics"]
+    }
+  },
+  {
+    "id": "JO",
+    "code": "JO",
+    "name": "Jordan",
+    "region": "Asia",
+    "regulators": ["Central Bank of Jordan", "Anti-Money Laundering Unit"],
+    "laws": ["AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect ID/passport and verify identity",
+        "Establish the nature of the business relationship",
+        "Collect source of funds information"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Source of Funds documents"],
+      "aml_checks": [
+        "Sanctions and PEP screening",
+        "UBO identification for corporate customers",
+        "Enhanced checks for real-estate transactions"
+      ],
+      "risk_scoring": ["Assign risk band per Central Bank guidance", "EDD for politically exposed persons and non-residents"],
+      "reporting": ["STRs to national AML unit", "Record retention 5 years"],
+      "ongoing_monitoring": ["Periodic sanction list re-screening", "Transaction alerting for high-value flows"]
+    }
+  },
+  {
+    "id": "KW",
+    "code": "KW",
+    "name": "Kuwait",
+    "region": "Asia",
+    "regulators": ["Central Bank of Kuwait", "Kuwait Financial Intelligence Unit"],
+    "laws": ["AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using national ID or passport",
+        "Collect residency/visa details for expatriates",
+        "Capture business purpose and expected activity"
+      ],
+      "documents": ["Passport/ID", "Residence permit/visa", "Proof of Address"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "UBO verification for corporate customers",
+        "Enhanced diligence for cash-intensive trades"
+      ],
+      "risk_scoring": ["Assign risk considering nationality and industry", "EDD for politically exposed persons"],
+      "reporting": ["STR submission to Kuwait FIU", "Records retention as per law"],
+      "ongoing_monitoring": ["Monthly review for high-risk customers", "Automated threshold alerts"]
+    }
+  },
+  {
+    "id": "LB",
+    "code": "LB",
+    "name": "Lebanon",
+    "region": "Asia",
+    "regulators": ["Banque du Liban", "Special Investigation Commission (SIC)"],
+    "laws": ["AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport",
+        "Establish customer's source of funds and purpose",
+        "Identify beneficial owners for corporate accounts"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Bank statements for source of funds"],
+      "aml_checks": [
+        "Sanctions and PEP screening",
+        "Enhanced due diligence for politically exposed persons",
+        "Cross-border remittance checks"
+      ],
+      "risk_scoring": ["Risk scoring with country overlay", "EDD for politically exposed persons and high-value accounts"],
+      "reporting": ["STR to SIC", "Records retention per regulator guidance"],
+      "ongoing_monitoring": ["Regular re-screening of sanctions lists", "Transaction pattern monitoring and manual review"]
+    }
+  },
+  {
+    "id": "OM",
+    "code": "OM",
+    "name": "Oman",
+    "region": "Asia",
+    "regulators": ["Central Bank of Oman", "Oman AML Unit"],
+    "laws": ["Anti-Money Laundering and Countering Financing of Terrorism Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using national ID or passport",
+        "Collect employment and source of funds details",
+        "Screen customer against national and international lists"
+      ],
+      "documents": ["Passport/ID", "Residence permit for expatriates", "Proof of Address"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "UBO verification for companies",
+        "EDD for high-risk product types"
+      ],
+      "risk_scoring": ["Assign risk bands per regulator guidance", "EDD for non-resident and politically exposed customers"],
+      "reporting": ["Report STRs to national AML unit", "Record retention for 5–7 years"],
+      "ongoing_monitoring": ["Periodic sanctions and PEP re-screening", "Transaction monitoring with alerts"]
+    }
+  },
+  {
+    "id": "PS",
+    "code": "PS",
+    "name": "Palestine",
+    "region": "Asia",
+    "regulators": ["Palestine Monetary Authority", "Financial Monitoring Unit"],
+    "laws": ["AML/CFT Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Capture ID or passport information",
+        "Verify identity with available national registries",
+        "Collect purpose and expected transaction profile"
+      ],
+      "documents": ["ID/Passport", "Proof of Address", "Business documents for corporate accounts"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "Cross-border remittance checks",
+        "Enhanced checks for cash-heavy sectors"
+      ],
+      "risk_scoring": ["Assign risk levels considering geography and customer type", "EDD for high-value accounts"],
+      "reporting": ["File STRs to Financial Monitoring Unit", "Maintain records per law"],
+      "ongoing_monitoring": ["Manual reviews of flagged transactions", "Periodic KYC revalidation"]
+    }
+  },
+  {
+    "id": "QA",
+    "code": "QA",
+    "name": "Qatar",
+    "region": "Asia",
+    "regulators": ["Qatar Central Bank", "Financial Information Unit"],
+    "laws": ["AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport and verify",
+        "Collect employment/occupation and source of funds",
+        "Identify beneficial owners for legal entities"
+      ],
+      "documents": ["Passport/ID", "Residency permit/Work visa", "Proof of Address"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "UBO verification",
+        "EDD for real estate and high-value goods sectors"
+      ],
+      "risk_scoring": ["Risk scoring per QCB guidelines", "EDD for politically exposed persons and non-resident accounts"],
+      "reporting": ["STRs to Qatar FIU", "Record retention 5 years"],
+      "ongoing_monitoring": ["Daily sanctions and PEP re-screening", "Threshold-based transaction alerts"]
+    }
+  },
+  {
+    "id": "SA",
+    "code": "SA",
+    "name": "Saudi Arabia",
+    "region": "Asia",
+    "regulators": ["Saudi Arabian Monetary Authority (SAMA)", "Financial Intelligence Unit"],
+    "laws": ["Anti-Money Laundering Law", "Counter-Terrorism Financing Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using national ID or passport",
+        "Capture taxpayer ID and source of funds",
+        "Perform PEP & sanctions checks"
+      ],
+      "documents": ["National ID / Iqama / Passport", "Proof of Address", "Source of Funds documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Enhanced checks for oil & gas and real estate sectors",
+        "Adverse media screening"
+      ],
+      "risk_scoring": ["SAMA risk bands assignment", "EDD for non-resident and politically exposed persons"],
+      "reporting": ["STR reporting to FIU", "Record retention 5–10 years depending on sector"],
+      "ongoing_monitoring": ["Continuous sanctions monitoring", "Transaction profiling and anomaly alerts"]
+    }
+  },
+  {
+    "id": "SY",
+    "code": "SY",
+    "name": "Syria",
+    "region": "Asia",
+    "regulators": ["Central Bank of Syria", "Financial Intelligence Unit"],
+    "laws": ["AML/CFT regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID where available",
+        "Record purpose of account and expected activity",
+        "Enhanced verification for cross-border clients"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration for companies"],
+      "aml_checks": [
+        "Sanctions and PEP screening",
+        "Enhanced scrutiny for cross-border remittances",
+        "Watch-list screening for restricted jurisdictions"
+      ],
+      "risk_scoring": ["High baseline country risk adjustment", "EDD for remittances and cash-intensive clients"],
+      "reporting": ["File STRs to national FIU", "Records as required by law"],
+      "ongoing_monitoring": ["High-frequency transaction monitoring", "Manual reviews for flagged transfers"]
+    }
+  },
+  {
+    "id": "TR",
+    "code": "TR",
+    "name": "Turkey",
+    "region": "Europe/Asia",
+    "regulators": ["Banking Regulation and Supervision Agency (BRSA)", "Financial Crimes Investigation Board (MASAK)"],
+    "laws": ["Law on Prevention of Laundering Proceeds of Crime"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via national ID or passport",
+        "Collect tax ID and purpose of relationship",
+        "Identify beneficial owners for entities"
+      ],
+      "documents": ["National ID / Passport", "Tax ID", "Proof of Address"],
+      "aml_checks": [
+        "MASAK sanctions & PEP screening",
+        "UBO identification",
+        "Adverse media screening"
+      ],
+      "risk_scoring": ["Assign risk per product, geography and customer type", "EDD for high-value cross-border clients"],
+      "reporting": ["STRs to MASAK", "Retain records 5–7 years"],
+      "ongoing_monitoring": ["Periodic re-screening", "Transaction anomaly detection with thresholds"]
+    }
+  },
+  {
+    "id": "AE",
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "region": "Asia",
+    "regulators": ["Central Bank of UAE", "DFSA (for DIFC)", "FIA"],
+    "laws": ["Cabinet Decision No. 10 of 2019", "AML-CFT Rulebook (DFSA)"],
+    "workflow": {
+      "kyc_steps": [
+        "Capture Emirates ID or passport and verify",
+        "Collect visa/residency status for expatriates",
+        "Identify UBOs and source of funds"
+      ],
+      "documents": ["Emirates ID / Passport", "Visa / Residency docs", "Proof of Address"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "UBO verification",
+        "EDD for crypto, real estate and precious metals"
+      ],
+      "risk_scoring": ["CBUAE risk categorization", "EDD triggers for cross-border, high-value clients"],
+      "reporting": ["STR submission to UAE FIU", "UBO registry compliance"],
+      "ongoing_monitoring": ["Monthly high-risk customer reviews", "Daily sanctions list refreshes"]
+    }
+  },
+  {
+    "id": "YE",
+    "code": "YE",
+    "name": "Yemen",
+    "region": "Asia",
+    "regulators": ["Central Bank of Yemen", "Financial Intelligence Unit"],
+    "laws": ["AML/CFT legislation"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID",
+        "Verify identity and gather business purpose",
+        "Enhanced checks for humanitarian/NGO flows"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Organization registration (for NGOs)"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Beneficial owner checks",
+        "Enhanced monitoring for cross-border transfers"
+      ],
+      "risk_scoring": ["Elevated country risk factor", "EDD for large incoming remittances"],
+      "reporting": ["Report suspicious activity to FIU", "Records as required locally"],
+      "ongoing_monitoring": ["Manual monitoring for flagged activities", "Frequent revalidation of KYC for high-risk relationships"]
+    }
+  },
+  {
+    "id": "KZ",
+    "code": "KZ",
+    "name": "Kazakhstan",
+    "region": "Asia",
+    "regulators": ["National Bank of Kazakhstan", "Financial Monitoring Service"],
+    "laws": ["Law on Countering Legalization of Criminal Proceeds"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport details",
+        "Verify identity via government e-services",
+        "Identify UBOs for legal entities"
+      ],
+      "documents": ["ID/Passport", "Proof of Address", "Company registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "UBO verification",
+        "High-risk jurisdiction screening"
+      ],
+      "risk_scoring": ["Risk scoring by customer type and industry", "EDD for cash-heavy or opaque ownership structures"],
+      "reporting": ["File STRs to Financial Monitoring Service", "Record retention 5 years"],
+      "ongoing_monitoring": ["Regular sanctions re-screening", "Automated transaction monitoring"]
+    }
+  },
+  {
+    "id": "KG",
+    "code": "KG",
+    "name": "Kyrgyzstan",
+    "region": "Asia",
+    "regulators": ["National Bank of the Kyrgyz Republic", "Financial Intelligence Unit"],
+    "laws": ["AML/CFT legislation"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID",
+        "Verify identity and obtain expected activity profile",
+        "UBO identification for companies"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Cross-border payment checks",
+        "Adverse media checks"
+      ],
+      "risk_scoring": ["Country risk overlay plus customer industry", "EDD for foreign-sourced funds"],
+      "reporting": ["STR filing to FIU", "Maintain records as required"],
+      "ongoing_monitoring": ["Periodic KYC refresh", "Transaction anomaly detection"]
+    }
+  },
+  {
+    "id": "TJ",
+    "code": "TJ",
+    "name": "Tajikistan",
+    "region": "Asia",
+    "regulators": ["National Bank of Tajikistan", "Financial Monitoring Unit"],
+    "laws": ["AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity through national ID or passport",
+        "Collect purpose of account and expected transaction profile",
+        "Identify beneficial owners for corporate customers"
+      ],
+      "documents": ["ID/Passport", "Proof of Address", "Company documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Cross-border remittance monitoring",
+        "EDD for large cash transactions"
+      ],
+      "risk_scoring": ["Add country risk factor and customer risk", "EDD for high-risk sectors like precious metals"],
+      "reporting": ["STRs to national FIU", "Record retention per law"],
+      "ongoing_monitoring": ["Manual review of flagged alerts", "Periodic re-screening of clients"]
+    }
+  },
+  {
+    "id": "TM",
+    "code": "TM",
+    "name": "Turkmenistan",
+    "region": "Asia",
+    "regulators": ["Central Bank of Turkmenistan", "Financial Monitoring Unit"],
+    "laws": ["AML/CFT regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID",
+        "Verify identity and capture account purpose",
+        "Enhanced verification for cross-border clients"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Cross-border payment monitoring",
+        "Source of funds checks"
+      ],
+      "risk_scoring": ["Higher baseline country risk", "EDD for non-resident and complex ownership accounts"],
+      "reporting": ["STRs to FIU", "Records kept per regulator guidance"],
+      "ongoing_monitoring": ["Frequent revalidation for high-risk clients", "Transaction monitoring with manual escalation"]
+    }
+  },
+  {
+    "id": "UZ",
+    "code": "UZ",
+    "name": "Uzbekistan",
+    "region": "Asia",
+    "regulators": ["Central Bank of Uzbekistan", "Financial Monitoring Service"],
+    "laws": ["Law on Combating Legalization of Criminally Obtained Funds"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport and verify",
+        "Obtain purpose of relationship and source of funds",
+        "Identify beneficial owners for business accounts"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Company registration"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "UBO verification",
+        "Cross-border transaction checks"
+      ],
+      "risk_scoring": ["Customer risk profile with country overlay", "EDD for foreign-sourced funds and shell entities"],
+      "reporting": ["STR submission to Financial Monitoring Service", "Record retention 5 years"],
+      "ongoing_monitoring": ["Automated transaction monitoring", "Periodic KYC updates for medium/high-risk clients"]
+    }
+  },
+  {
+    "id": "AF",
+    "code": "AF",
+    "name": "Afghanistan",
+    "region": "Asia",
+    "regulators": ["Da Afghanistan Bank", "Financial Intelligence Unit"],
+    "laws": ["AML/CFT Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID where available",
+        "Establish source of funds and beneficiary information",
+        "Enhanced checks for humanitarian or NGO flows"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Organization registration for NGOs"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Monitoring for large remittances",
+        "Enhanced checks for cash-intensive sectors"
+      ],
+      "risk_scoring": ["High country risk baseline", "EDD for foreign-sourced funds and non-profit entities"],
+      "reporting": ["STR to national FIU", "Records as required locally"],
+      "ongoing_monitoring": ["Manual review of flagged transactions", "Frequent revalidation for active accounts"]
+    }
+  },
+  {
+    "id": "BD",
+    "code": "BD",
+    "name": "Bangladesh",
+    "region": "Asia",
+    "regulators": ["Bangladesh Bank", "Financial Intelligence Unit"],
+    "laws": ["Money Laundering Prevention Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via national ID (NID) or passport",
+        "Collect occupation and expected transaction profile",
+        "Identify UBOs for corporate customers"
+      ],
+      "documents": ["NID / Passport", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Adverse media screening",
+        "Cross-border remittance checks"
+      ],
+      "risk_scoring": ["Apply Bangladesh Bank risk model", "EDD for remittances and high-value transactions"],
+      "reporting": ["STR submissions to FIU", "Record retention per local law"],
+      "ongoing_monitoring": ["Automated transaction alerts", "Periodic review of high-risk accounts"]
+    }
+  },
+  {
+    "id": "BT",
+    "code": "BT",
+    "name": "Bhutan",
+    "region": "Asia",
+    "regulators": ["Royal Monetary Authority of Bhutan"],
+    "laws": ["Anti-Money Laundering and Counter Financing of Terrorism Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport details",
+        "Verify identity and purpose of account",
+        "Collect source-of-funds information"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Source of Funds documents"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "Enhanced checks for foreign clients",
+        "Beneficial owner checks for companies"
+      ],
+      "risk_scoring": ["Assign risk bands based on residency and activity", "EDD for high value and non-resident accounts"],
+      "reporting": ["STR to FIU", "Record retention 5 years"],
+      "ongoing_monitoring": ["Periodic transaction reviews", "Manual review for flagged alerts"]
+    }
+  },
+  {
+    "id": "IN",
+    "code": "IN",
+    "name": "India",
+    "region": "Asia",
+    "regulators": ["Reserve Bank of India (RBI)", "FIU-IND", "SEBI"],
+    "laws": ["Prevention of Money Laundering Act (PMLA)", "KYC Master Directions"],
+    "workflow": {
+      "kyc_steps": [
+        "e-KYC using Aadhaar offline or Video KYC",
+        "PAN verification and tax residency capture",
+        "Collect occupation, income band and expected activity"
+      ],
+      "documents": ["Aadhaar", "PAN", "Proof of Address"],
+      "aml_checks": [
+        "FIU-IND sanctions & PEP screening",
+        "Negative media screening",
+        "EDD for NRIs and high-value accounts"
+      ],
+      "risk_scoring": ["Risk classification Low/Medium/High", "EDD for high-net-worth individuals and complex entities"],
+      "reporting": ["CTR & STR to FIU-IND", "Record retention 5 years"],
+      "ongoing_monitoring": ["Real-time transaction monitoring", "KYC refresh every 2 years for medium-risk clients"]
+    }
+  },
+  {
+    "id": "IR",
+    "code": "IR",
+    "name": "Iran",
+    "region": "Asia",
+    "regulators": ["Central Bank of Iran", "Financial Intelligence Unit"],
+    "laws": ["AML/CFT legislation"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport and verify identity",
+        "Obtain details on source of funds and purpose",
+        "Enhanced verification for foreign remittances"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Business documents for companies"],
+      "aml_checks": [
+        "Sanctions and PEP screening with high scrutiny",
+        "Cross-border transaction monitoring",
+        "Enhanced checks for trade finance flows"
+      ],
+      "risk_scoring": ["Elevated country risk, automatic higher baseline", "EDD for foreign currency transfers and complex structures"],
+      "reporting": ["STRs to FIU", "Record retention per national rules"],
+      "ongoing_monitoring": ["High-frequency transaction monitoring", "Manual reviews and escalation for flagged items"]
+    }
+  },
+  {
+    "id": "MV",
+    "code": "MV",
+    "name": "Maldives",
+    "region": "Asia",
+    "regulators": ["Maldives Monetary Authority", "Financial Intelligence Unit"],
+    "laws": ["Anti-Money Laundering and Countering Financing of Terrorism Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport and verify",
+        "Identify purpose of account and expected transactions",
+        "Identify UBOs for corporate customers"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Enhanced checks for tourism-related businesses",
+        "Cross-border payment monitoring"
+      ],
+      "risk_scoring": ["Tourism / hospitality sector risk overlay", "EDD for high-volume cash flows"],
+      "reporting": ["STRs to FIU", "Record retention as per law"],
+      "ongoing_monitoring": ["Frequent re-screening during peak seasons", "Transaction anomaly detection"]
+    }
+  },
+  {
+    "id": "NP",
+    "code": "NP",
+    "name": "Nepal",
+    "region": "Asia",
+    "regulators": ["Nepal Rastra Bank", "Financial Information Unit"],
+    "laws": ["Anti-Money Laundering and Combating Financing of Terrorism Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via national ID or passport",
+        "Capture occupation and expected account activity",
+        "Collect source of funds for business accounts"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Adverse media checks",
+        "Cross-border remittance checks"
+      ],
+      "risk_scoring": ["Risk scoring by customer type and transaction profile", "EDD for non-resident and high-value accounts"],
+      "reporting": ["STRs to FIU", "Records retained as required"],
+      "ongoing_monitoring": ["Periodic KYC refresh", "Transaction monitoring for unusual spikes"]
+    }
+  },
+  {
+    "id": "PK",
+    "code": "PK",
+    "name": "Pakistan",
+    "region": "Asia",
+    "regulators": ["State Bank of Pakistan", "Financial Monitoring Unit (FMU)"],
+    "laws": ["Anti-Money Laundering Act", "Terrorism Financing Prevention Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect CNIC or passport and verify",
+        "Determine nature and purpose of relationship",
+        "Identify beneficial owners for legal entities"
+      ],
+      "documents": ["CNIC / Passport", "Proof of Address", "Business registration documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Adverse media and negative news checks",
+        "EDD for foreign remittances"
+      ],
+      "risk_scoring": ["Country and product risk overlay", "EDD for high-risk customers and sectors"],
+      "reporting": ["STRs to FMU", "Record retention per regulator guidance"],
+      "ongoing_monitoring": ["Periodic re-screening and transaction monitoring", "Manual case management for suspicious activity"]
+    }
+  },
+  {
+    "id": "LK",
+    "code": "LK",
+    "name": "Sri Lanka",
+    "region": "Asia",
+    "regulators": ["Central Bank of Sri Lanka", "Financial Intelligence Unit"],
+    "laws": ["Financial Transactions Reporting Act / AML Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity with national ID or passport",
+        "Capture occupation and expected transactional behavior",
+        "Beneficial owner checks for businesses"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Adverse media and litigation checks",
+        "Cross-border transaction monitoring"
+      ],
+      "risk_scoring": ["Assign risk bands based on industry and geography", "EDD for foreign-sourced funds and high-value accounts"],
+      "reporting": ["STRs to FIU", "Record retention per law"],
+      "ongoing_monitoring": ["Automated transaction alerting", "Periodic reviews for medium/high-risk clients"]
+    }
+  },
+  {
+    "id": "CN",
+    "code": "CN",
+    "name": "China",
+    "region": "Asia",
+    "regulators": ["People's Bank of China (PBOC)", "China Banking and Insurance Regulatory Commission (CBIRC)"],
+    "laws": ["Anti-Money Laundering Law", "Regulations on Financial Institutions' AML"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using national ID or passport and government databases",
+        "Collect employment and source of funds information",
+        "Identify UBOs for corporate accounts"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Company registration (for corporates)"],
+      "aml_checks": [
+        "Domestic sanctions/blacklist checks",
+        "PEP screening and adverse media checks",
+        "Enhanced scrutiny for cross-border RMB flows"
+      ],
+      "risk_scoring": ["Assign risk using PBOC-guided models", "EDD for cross-border and outward remittances"],
+      "reporting": ["Report suspicious transactions to the national FIU", "Record retention per PBOC guidance"],
+      "ongoing_monitoring": ["Real-time screening for cross-border transactions", "Frequent re-screening of high-risk customers"]
+    }
+  },
+  {
+    "id": "HK",
+    "code": "HK",
+    "name": "Hong Kong",
+    "region": "Asia",
+    "regulators": ["Hong Kong Monetary Authority (HKMA)", "Securities and Futures Commission (SFC)"],
+    "laws": ["Anti-Money Laundering and Counter-Terrorist Financing Ordinance (AMLO)"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via HKID or passport",
+        "Collect residential address and nature of relationship",
+        "Identify beneficial owners for corporate clients"
+      ],
+      "documents": ["HKID / Passport", "Proof of Address", "Company incorporation documents"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "EDD for non-face-to-face onboarding",
+        "Cross-border payment monitoring"
+      ],
+      "risk_scoring": ["Assign ML/TF risk classification", "EDD for foreign-sourced wealth and private banking clients"],
+      "reporting": ["STRs to Joint Financial Intelligence Unit (JFIU)", "Record retention 6 years"],
+      "ongoing_monitoring": ["Continuous transaction surveillance", "Periodic sanctions/PEP re-screening"]
+    }
+  },
+  {
+    "id": "JP",
+    "code": "JP",
+    "name": "Japan",
+    "region": "Asia",
+    "regulators": ["Japan Financial Services Agency (JFSA)", "National Police Agency (for FIU functions)"],
+    "laws": ["Act on Prevention of Transfer of Criminal Proceeds"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using passport or My Number where applicable",
+        "Collect occupation and source of funds",
+        "UBO identification for legal entities"
+      ],
+      "documents": ["Passport / My Number / ID", "Proof of Address", "Company registration docs"],
+      "aml_checks": [
+        "Domestic sanctions and PEP screening",
+        "Adverse media checks",
+        "EDD for high-value and cross-border accounts"
+      ],
+      "risk_scoring": ["Assign risk based on product & geography", "EDD triggers for non-face-to-face onboarding"],
+      "reporting": ["Report suspicious transactions to national FIU", "Record retention per law"],
+      "ongoing_monitoring": ["Frequent re-screening and transaction monitoring", "Periodic KYC refresh for business accounts"]
+    }
+  },
+  {
+    "id": "MO",
+    "code": "MO",
+    "name": "Macau",
+    "region": "Asia",
+    "regulators": ["Monetary Authority of Macao (AMCM)"],
+    "laws": ["Law on Prevention and Combating of Money Laundering"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via passport or local ID",
+        "Capture purpose and expected activity (tourism/gaming focus)",
+        "Identify beneficial owners for companies"
+      ],
+      "documents": ["Passport / Local ID", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Enhanced checks for gaming & tourism sectors",
+        "Cross-border transfer monitoring"
+      ],
+      "risk_scoring": ["Sector-specific high-risk overlay (gaming)", "EDD for large cash exchanges"],
+      "reporting": ["STRs to AMCM FIU", "Record retention per local rules"],
+      "ongoing_monitoring": ["High-frequency monitoring for gaming transactions", "Periodic KYC re-validation"]
+    }
+  },
+  {
+    "id": "MN",
+    "code": "MN",
+    "name": "Mongolia",
+    "region": "Asia",
+    "regulators": ["Bank of Mongolia", "Financial Intelligence Unit"],
+    "laws": ["Law on Combating Money Laundering and Terrorism Financing"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID",
+        "Verify purpose of account and expected transaction volume",
+        "Identify UBO for corporate clients"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Enhanced checks for mining and cash-intensive sectors",
+        "Cross-border remittance checks"
+      ],
+      "risk_scoring": ["Add commodity sector risk overlay", "EDD for non-resident customers"],
+      "reporting": ["STRs to FIU", "Record retention per rules"],
+      "ongoing_monitoring": ["Transaction monitoring for commodity related flows", "Periodic re-screening and KYC update"]
+    }
+  },
+  {
+    "id": "KP",
+    "code": "KP",
+    "name": "North Korea",
+    "region": "Asia",
+    "regulators": ["State Bank / Relevant Authorities (restricted jurisdiction)"],
+    "laws": ["Domestic AML/CFT regime (limited public detail)"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect available identity documentation (limited)",
+        "Capture purpose and restrict high-risk flows",
+        "Apply enhanced verification where possible"
+      ],
+      "documents": ["Passport (if available)", "Other government ID"],
+      "aml_checks": [
+        "Strict sanctions & embargo screening",
+        "Enhanced counterparty verification",
+        "Block high-risk cross-border channels"
+      ],
+      "risk_scoring": ["Highest risk category due to sanctions", "Deny or apply maximum EDD to most transactions"],
+      "reporting": ["Escalate to national authorities / deny onboarding", "Record retention per national rules"],
+      "ongoing_monitoring": ["Continuous manual surveillance", "No typical commercial onboarding in most cases"]
+    }
+  },
+  {
+    "id": "KR",
+    "code": "KR",
+    "name": "South Korea",
+    "region": "Asia",
+    "regulators": ["Financial Services Commission (FSC)", "Financial Intelligence Unit (KoFIU)"],
+    "laws": ["Act on Reporting and Using Specified Financial Transaction Information"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via Resident Registration Number or passport",
+        "Collect employment, income band and expected transaction purpose",
+        "Identify beneficial owners for corporate accounts"
+      ],
+      "documents": ["Resident ID / Passport", "Proof of Address", "Company documents"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Adverse media checks",
+        "EDD for crypto and fintech-related accounts"
+      ],
+      "risk_scoring": ["Assign KoFIU-recommended risk bands", "EDD for cross-border and high-frequency accounts"],
+      "reporting": ["Report suspicious transactions to KoFIU", "Records retention per law"],
+      "ongoing_monitoring": ["Real-time transaction monitoring", "Frequent re-screening of PEP and sanctions lists"]
+    }
+  },
+  {
+    "id": "TW",
+    "code": "TW",
+    "name": "Taiwan",
+    "region": "Asia",
+    "regulators": ["Financial Supervisory Commission (FSC)"],
+    "laws": ["Money Laundering Control Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via national ID or passport",
+        "Obtain tax residency and source-of-funds details",
+        "Identify UBOs for legal entities"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Company registration docs"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "Adverse media checks",
+        "EDD for cross-border accounts"
+      ],
+      "risk_scoring": ["Assign risk by product and geography", "EDD for non-face-to-face onboarding"],
+      "reporting": ["Report STRs to national FIU", "Record retention per law"],
+      "ongoing_monitoring": ["Transaction monitoring with thresholds", "Periodic KYC refresh for higher-risk accounts"]
+    }
+  },
+  {
+    "id": "BN",
+    "code": "BN",
+    "name": "Brunei",
+    "region": "Asia",
+    "regulators": ["Monetary Authority of Brunei Darussalam (AMBD)"],
+    "laws": ["Anti-Money Laundering and Countering the Financing of Terrorism Order"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via national ID or passport",
+        "Capture business purpose and expected activity",
+        "UBO identification for companies"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Enhanced checks for shell companies",
+        "Adverse media screening"
+      ],
+      "risk_scoring": ["Assign sector and country risk overlay", "EDD for non-residents and high-net-worth individuals"],
+      "reporting": ["STRs to FIU", "Record retention per regulator guidance"],
+      "ongoing_monitoring": ["Periodic re-screening and monitoring", "Transaction anomaly detection"]
+    }
+  },
+  {
+    "id": "KH",
+    "code": "KH",
+    "name": "Cambodia",
+    "region": "Asia",
+    "regulators": ["National Bank of Cambodia", "Financial Intelligence Unit"],
+    "laws": ["Law on Anti-Money Laundering and Combating the Financing of Terrorism"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport",
+        "Verify identity and determine expected activity",
+        "UBO checks for corporate accounts"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Enhanced checks for cash-heavy and tourism sectors",
+        "Cross-border remittance monitoring"
+      ],
+      "risk_scoring": ["Country and sector risk overlay (tourism/garments)", "EDD for non-resident and high-value accounts"],
+      "reporting": ["STRs to FIU", "Record retention 5 years"],
+      "ongoing_monitoring": ["Automated transaction monitoring", "Periodic KYC re-validation"]
+    }
+  },
+  {
+    "id": "TL",
+    "code": "TL",
+    "name": "Timor-Leste",
+    "region": "Asia",
+    "regulators": ["Central Bank of Timor-Leste", "Financial Intelligence Unit"],
+    "laws": ["AML/CFT Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID",
+        "Verify identity and account purpose",
+        "Enhanced checks for aid/NGO flows"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Organization registration for NGOs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Enhanced monitoring for large inflows",
+        "Beneficial owner checks for companies"
+      ],
+      "risk_scoring": ["High baseline due to developing framework", "EDD for foreign-sourced funds"],
+      "reporting": ["STRs to national FIU", "Record retention per law"],
+      "ongoing_monitoring": ["Manual review for flagged activity", "Periodic KYC updates"]
+    }
+  },
+  {
+    "id": "ID",
+    "code": "ID",
+    "name": "Indonesia",
+    "region": "Asia",
+    "regulators": ["Financial Services Authority (OJK)", "Financial Transaction Reports and Analysis Center (PPATK)"],
+    "laws": ["Anti Money Laundering and Counter Terrorism Financing Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity via KTP or passport",
+        "Collect NPWP (tax ID) where applicable",
+        "Identify beneficial owners for corporate accounts"
+      ],
+      "documents": ["KTP / Passport", "Proof of Address", "Company registration docs"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Adverse media checks",
+        "EDD for high-risk sectors (mining, commodities)"
+      ],
+      "risk_scoring": ["Assign risk based on geography and product", "EDD for non-face-to-face onboarding"],
+      "reporting": ["STRs to PPATK", "Record retention per regulation"],
+      "ongoing_monitoring": ["Automated transaction monitoring", "Periodic re-screening of PEP/sanctions lists"]
+    }
+  },
+  {
+    "id": "LA",
+    "code": "LA",
+    "name": "Laos",
+    "region": "Asia",
+    "regulators": ["Bank of the Lao PDR", "Financial Intelligence Unit"],
+    "laws": ["Anti-Money Laundering and Counter-Terrorist Financing Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport",
+        "Verify identity and capture transaction purpose",
+        "UBO identification for corporate accounts"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Enhanced checks for cross-border transfers",
+        "Adverse media checks"
+      ],
+      "risk_scoring": ["Country and sector risk overlay", "EDD for non-resident clients and cash-intensive businesses"],
+      "reporting": ["STRs to FIU", "Record retention as per law"],
+      "ongoing_monitoring": ["Periodic KYC refresh", "Transaction monitoring and manual review"]
+    }
+  },
+  {
+    "id": "MY",
+    "code": "MY",
+    "name": "Malaysia",
+    "region": "Asia",
+    "regulators": ["Bank Negara Malaysia (BNM)"],
+    "laws": ["Anti-Money Laundering, Anti-Terrorism Financing and Proceeds of Unlawful Activities Act (AMLA)"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using MyKad or passport",
+        "Collect tax residency and source of funds",
+        "Identify UBOs for entities"
+      ],
+      "documents": ["MyKad / Passport", "Proof of Address", "Company incorporation documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Adverse media checks",
+        "EDD for high-risk industries and cross-border transactions"
+      ],
+      "risk_scoring": ["BNM-guided risk bands", "EDD for politically exposed persons and non-residents"],
+      "reporting": ["STRs to FIU", "Record retention 7 years for some sectors"],
+      "ongoing_monitoring": ["Continuous transaction monitoring", "Periodic re-screening and KYC refresh"]
+    }
+  },
+  {
+    "id": "MM",
+    "code": "MM",
+    "name": "Myanmar",
+    "region": "Asia",
+    "regulators": ["Central Bank of Myanmar", "Financial Intelligence Unit"],
+    "laws": ["Anti-Money Laundering and Counter Terrorist Financing Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport",
+        "Verify identity and establish purpose of relationship",
+        "Identify UBOs for corporate clients"
+      ],
+      "documents": ["National ID / Passport", "Proof of Address", "Company registration"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Cross-border payment checks",
+        "EDD for high-risk sectors"
+      ],
+      "risk_scoring": ["Higher baseline country risk", "EDD for foreign-sourced funds and remittances"],
+      "reporting": ["STRs to FIU", "Record retention per local law"],
+      "ongoing_monitoring": ["Manual review of alerts", "Periodic re-screening"]
+    }
+  },
+  {
+    "id": "PH",
+    "code": "PH",
+    "name": "Philippines",
+    "region": "Asia",
+    "regulators": ["Bangko Sentral ng Pilipinas (BSP)", "Anti-Money Laundering Council (AMLC)"],
+    "laws": ["Anti-Money Laundering Act (AMLA)"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using national ID or passport",
+        "Collect taxpayer ID (TIN) and source of funds",
+        "Identify beneficial owners for corporate customers"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration docs"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Adverse media checks",
+        "EDD for remittances and casinos"
+      ],
+      "risk_scoring": ["AMLC-recommended risk scoring", "EDD for cross-border accounts and casinos"],
+      "reporting": ["STRs to AMLC", "Record retention per law"],
+      "ongoing_monitoring": ["Real-time transaction monitoring", "Periodic KYC re-validation"]
+    }
+  },
+  {
+    "id": "SG",
+    "code": "SG",
+    "name": "Singapore",
+    "region": "Asia",
+    "currency": "SGD",
+    "population": 5703569,
+    "regulators": ["Monetary Authority of Singapore (MAS)"],
+    "laws": ["MAS AML/CFT Notices", "Corruption and other serious crimes legislation"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity using SingPass or biometric eKYC",
+        "Capture purpose of relationship and expected activity",
+        "Identify beneficial owners of legal entities"
+      ],
+      "documents": ["NRIC / Passport", "Proof of Address", "BizFile / UEN documents"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "Adverse media and source-of-wealth checks",
+        "EDD for cross-border and private banking clients"
+      ],
+      "risk_scoring": ["MAS risk band assignment (Low/Medium/High)", "EDD for international customer bases"],
+      "reporting": ["STRs to Suspicious Transaction Reporting Office (STRO)", "Record retention 5 years"],
+      "ongoing_monitoring": ["Daily anomaly detection", "Frequent PEP/sanctions re-screening"]
+    }
+  },
+  {
+    "id": "US",
+    "code": "US",
+    "name": "United States",
+    "region": "North America",
+    "currency": "USD",
+    "population": 331002651,
+    "regulators": ["Federal Reserve", "FinCEN"],
+    "laws": ["Bank Secrecy Act (BSA)", "USA PATRIOT Act"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect full legal name, DOB, SSN, address",
+        "KYC checks using government ID and selfie"
+      ],
+      "documents": ["Government ID", "Proof of Address", "TIN/SSN"],
+      "aml_checks": ["Sanctions & PEP screening", "AMES/Adverse media checks"],
+      "risk_scoring": ["Assign AML risk bands (Low/Medium/High)", "EDD for high-value customers"],
+      "reporting": ["File SARs to FinCEN", "Record retention 5 years"],
+      "ongoing_monitoring": ["Real-time transaction monitoring", "Periodic KYC refresh"]
+    }
+  }
+]
+[
+  {
+    "id": "AM",
+    "code": "AM",
+    "name": "Armenia",
+    "regulators": ["Central Bank of Armenia"],
+    "laws": ["Law on Combating Money Laundering and Terrorism Financing"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect full legal name and national ID",
+        "Verify identity via national eID or passport",
+        "Capture purpose of account and expected activity"
+      ],
+      "documents": ["Passport / National ID", "Proof of Address", "Source of Funds declaration"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Beneficial owner identification for entities",
+        "Adverse media checks"
+      ],
+      "risk_scoring": [
+        "Assign risk band based on customer type and industry",
+        "EDD for non-resident clients and cash-heavy industries"
+      ],
+      "reporting": ["STR filing to Financial Monitoring Center", "Record retention 5 years"],
+      "ongoing_monitoring": [
+        "Periodic re-screening of sanctions/PEP lists",
+        "Transaction monitoring for unusual patterns"
+      ]
+    }
+  },
+  {
+    "id": "AZ",
+    "code": "AZ",
+    "name": "Azerbaijan",
+    "regulators": ["Central Bank of Azerbaijan", "Financial Monitoring Service"],
+    "laws": ["Law on Combating Legalization of Criminally Obtained Funds"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport details",
+        "Verify identity via government e-services where available",
+        "Establish account purpose and expected transaction profile"
+      ],
+      "documents": ["Passport / ID", "Proof of Address", "Company registration for corporate customers"],
+      "aml_checks": [
+        "PEP and sanctions screening",
+        "UBO verification for corporate accounts",
+        "High-risk jurisdiction screening"
+      ],
+      "risk_scoring": [
+        "Risk assignment using industry + geography",
+        "EDD for politically exposed persons and complex ownership"
+      ],
+      "reporting": ["File STRs with Financial Monitoring Service", "Maintain CDD records for 5 years"],
+      "ongoing_monitoring": [
+        "Automated transaction threshold alerts",
+        "Annual review for medium/high-risk clients"
+      ]
+    }
+  },
+  {
+    "id": "BH",
+    "code": "BH",
+    "name": "Bahrain",
+    "regulators": ["Central Bank of Bahrain (CBB)"],
+    "laws": ["Anti-Money Laundering and Counter Financing of Terrorism Regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Verify identity with passport / national ID",
+        "Collect employment and source-of-funds information",
+        "Screen client against CBB & international lists"
+      ],
+      "documents": ["Passport/National ID", "Proof of Address", "Source of Wealth documents"],
+      "aml_checks": [
+        "Sanctions & PEP screening",
+        "Enhanced checks for real estate and jewelry traders",
+        "Cross-border flow monitoring"
+      ],
+      "risk_scoring": [
+        "Assign CBB-style risk categories",
+        "EDD for non-face-to-face onboarding and high-value accounts"
+      ],
+      "reporting": ["STRs to National AML Unit", "Retain records 5–7 years"],
+      "ongoing_monitoring": [
+        "Daily sanctions re-screening",
+        "Monthly high-risk portfolio review"
+      ]
+    }
+  },
+  {
+    "id": "CY",
+    "code": "CY",
+    "name": "Cyprus",
+    "regulators": ["Central Bank of Cyprus", "Unit for Combating Money Laundering (MOKAS)"],
+    "laws": ["Prevention and Suppression of Money Laundering Laws"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect identity and address details",
+        "Verify identity via passport or ID card",
+        "Identify beneficial owners for legal entities"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Company UBO documentation"],
+      "aml_checks": [
+        "EU sanctions & PEP screening",
+        "Adverse media checks",
+        "Monitoring for cross-border fund transfers"
+      ],
+      "risk_scoring": [
+        "EU-style risk categorization",
+        "EDD for offshore structures and non-resident clients"
+      ],
+      "reporting": ["Report suspicious activity to MOKAS", "Maintain records for 5 years"],
+      "ongoing_monitoring": [
+        "Periodic KYC refresh based on risk",
+        "Automated transaction anomaly detection"
+      ]
+    }
+  },
+  {
+    "id": "GE",
+    "code": "GE",
+    "name": "Georgia",
+    "regulators": ["National Bank of Georgia", "Financial Monitoring Service"],
+    "laws": ["Law on State Regulation of Financial Activities and AML/CFT Law"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect passport or national ID and verify via registry",
+        "Capture expected transactional behavior",
+        "Assess beneficial owners for companies"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Company registration documents"],
+      "aml_checks": [
+        "PEP/sanctions screening",
+        "UBO checks",
+        "Enhanced checks for cash-intensive sectors"
+      ],
+      "risk_scoring": [
+        "Assign risk based on residency and business type",
+        "Auto-EDD triggers for shell/opaque entities"
+      ],
+      "reporting": ["STR filing to Financial Monitoring Service", "Record retention 6 years"],
+      "ongoing_monitoring": [
+        "Regular sanctions list updates",
+        "Transaction monitoring with anomaly scoring"
+      ]
+    }
+  },
+  {
+    "id": "IQ",
+    "code": "IQ",
+    "name": "Iraq",
+    "regulators": ["Central Bank of Iraq", "Financial Information Unit"],
+    "laws": ["AML/CFT law and implementing regulations"],
+    "workflow": {
+      "kyc_steps": [
+        "Collect national ID or passport details",
+        "Verify identity with government records where possible",
+        "Record occupation and business purpose"
+      ],
+      "documents": ["Passport/ID", "Proof of Address", "Business registration documents"],
+      "aml_checks": [
+        "Sanctions/PEP screening",
+        "Cross-border payment screening",
+        "Enhanced checks for cash or commodity trades"
+      ],
+      "risk_scoring": [
+        "Country risk overlay + customer profile",
+        "EDD for cross-border traders and politically exposed persons"
+      ],
+      "reporting": ["STRs to the Financial Information Unit", "Record retention per national rules"],
+      "ongoing_monitoring": [
+        "Manual review of flagged transactions",
+        "Periodic KYC validation for ongoing relationships"
+      ]
+    }
+  }
+]
+[
+  {
+    "code": "US",
+    "name": "United States",
+    "region": "North America",
+    "currency": "USD",
+    "population": 331002651,
+    "onboarding": [
+      {
+        "id": "us-1",
+        "stepNumber": 1,
+        "title": "Collect basic personal information",
+        "description": "Full legal name, DOB, SSN, address",
+        "required": true,
+        "documents": ["Government ID", "Proof of Address"]
+      },
+      {
+        "id": "us-2",
+        "stepNumber": 2,
+        "title": "Identity verification",
+        "description": "KYC checks using government ID and selfie",
+        "required": true,
+        "documents": ["Passport/Driver's License"]
+      }
+    ]
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "region": "Asia",
+    "currency": "SGD",
+    "population": 5703569,
+    "onboarding": [
+      {
+        "id": "sg-1",
+        "stepNumber": 1,
+        "title": "Customer identification",
+        "description": "Collect NRIC/FIN and address",
+        "required": true,
+        "documents": ["NRIC/FIN", "Proof of Address"]
+      },
+      {
+        "id": "sg-2",
+        "stepNumber": 2,
+        "title": "AML checks",
+        "description": "Enhanced due diligence for foreign customers",
+        "required": true,
+        "documents": ["KYC Documentation"],
+        "conditions": ["Foreign nationality"]
+      }
+    ]
+  }
+]

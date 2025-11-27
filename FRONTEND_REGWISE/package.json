@@ -58,7 +58,7 @@
     "vite": "6.3.5"
   },
   "scripts": {
-            "dev": "concurrently --kill-others-on-fail -n BACKEND,FRONTEND \"npm --prefix ../regwise-backend run dev\" \"vite\"",
+    "dev": "concurrently --kill-others-on-fail -n BACKEND,FRONTEND \"npm --prefix ../regwise-backend run dev\" \"vite\"",
     "dev:frontend": "vite",
     "build": "vite build"
   }

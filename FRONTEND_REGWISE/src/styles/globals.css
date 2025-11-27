@@ -2,43 +2,44 @@
 
 :root {
   --font-size: 16px;
-  --background: #F8F9FA;
-  --foreground: #1F3B5C;
+  --background: #f8f9fa;
+  --foreground: #1f3b5c;
   --card: #ffffff;
-  --card-foreground: #1F3B5C;
+  --card-foreground: #1f3a60;
   --popover: #ffffff;
-  --popover-foreground: #1F3B5C;
-  --primary: #1F3B5C;
+  --popover-foreground: #1f3a60;
+  --primary: #1f3b5c;
   --primary-foreground: #ffffff;
-  --secondary: #00BFA6;
+  --secondary: #00bfa6;
   --secondary-foreground: #ffffff;
-  --muted: #E8EBED;
-  --muted-foreground: #6B7280;
-  --accent: #FFA500;
+  --muted: #e8ebed;
+  --muted-foreground: #2a3f56;
+  --accent: #ffa500;
   --accent-foreground: #ffffff;
-  --destructive: #EF4444;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: rgba(31, 59, 92, 0.1);
   --input: transparent;
   --input-background: #ffffff;
-  --switch-background: #cbced4;
+  --switch-background: #d0d7e2;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #1F3B5C;
-  --chart-1: #1F3B5C;
-  --chart-2: #00BFA6;
-  --chart-3: #FFA500;
-  --chart-4: #3B82F6;
-  --chart-5: #8B5CF6;
+  --ring: #1f3a60;
+  --chart-1: #1f3a60;
+  --chart-2: #3a7f6b;
+  --chart-3: #2a3f56;
+  --chart-4: #27466f;
+  --chart-5: #3e5c96;
   --radius: 0.75rem;
   --sidebar: #ffffff;
-  --sidebar-foreground: #1F3B5C;
-  --sidebar-primary: #1F3B5C;
+  --sidebar-foreground: #1f3a60;
+  --sidebar-primary: #1f3a60;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #F8F9FA;
-  --sidebar-accent-foreground: #1F3B5C;
-  --sidebar-border: rgba(31, 59, 92, 0.1);
-  --sidebar-ring: #1F3B5C;
+  --sidebar-accent: #f7f9fa;
+  --sidebar-accent-foreground: #1f3a60;
+  --sidebar-border: #d0d7e2;
+  --sidebar-ring: #1f3a60;
+  /* Search bar specific colors */
 }
 
 .dark {
@@ -133,7 +134,7 @@
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
 @layer base {
-  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
     h1 {
       font-size: var(--text-2xl);
       font-weight: var(--font-weight-medium);

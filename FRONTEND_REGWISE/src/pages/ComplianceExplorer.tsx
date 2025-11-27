@@ -1,47 +1,76 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
-import { complianceAPI } from '../services/api';
-import { ComplianceSummary, SearchResult } from '../types';
-import { RegulationModal } from '../components/RegulationModal';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Skeleton } from '../components/ui/skeleton';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { Separator } from '../components/ui/separator';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useApp } from "../context/AppContext";
+import { complianceAPI } from "../services/api";
+import { ComplianceSummary, SearchResult } from "../types";
+import { RegulationModal } from "../components/RegulationModal";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Skeleton } from "../components/ui/skeleton";
+import { Alert, AlertDescription } from "../components/ui/alert";
+import { Separator } from "../components/ui/separator";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../components/ui/select';
-import { COUNTRIES } from '../utils/constants';
-import { Search, ExternalLink, AlertCircle, Shield, Filter, ChevronDown, ChevronUp, Eye } from 'lucide-react';
-import { highlightKeywords } from '../utils/highlightKeywords.tsx';
+} from "../components/ui/select";
+import {
+  Search,
+  ExternalLink,
+  AlertCircle,
+  Shield,
+  Filter,
+  ChevronDown,
+  ChevronUp,
+  Eye,
+} from "lucide-react";
+import { highlightKeywords } from "../utils/highlightKeywords.tsx";
 
-const CATEGORIES = ['All', 'AML/CTF', 'Data Protection', 'Licensing', 'Risk Management'];
-const INDUSTRIES = ['All', 'Financial Services', 'FinTech', 'Banking', 'Insurance'];
+const CATEGORIES = [
+  "All",
+  "AML/CTF",
+  "Data Protection",
+  "Licensing",
+  "Risk Management",
+];
+const INDUSTRIES = [
+  "All",
+  "Financial Services",
+  "FinTech",
+  "Banking",
+  "Insurance",
+];
 
 export const ComplianceExplorer = () => {
   const location = useLocation();
-  const { selectedCountry, addSearchHistory } = useApp();
-  const [query, setQuery] = useState(location.state?.query || '');
+  const { selectedCountry, addSearchHistory, countries } = useApp();
+  const [query, setQuery] = useState(location.state?.query || "");
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
   const [summaries, setSummaries] = useState<ComplianceSummary[]>([]);
-  const [filteredSummaries, setFilteredSummaries] = useState<ComplianceSummary[]>([]);
+  const [filteredSummaries, setFilteredSummaries] = useState<
+    ComplianceSummary[]
+  >([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [selectedRegulation, setSelectedRegulation] = useState<ComplianceSummary | null>(null);
+  const [error, setError] = useState("");
+  const [selectedRegulation, setSelectedRegulation] =
+    useState<ComplianceSummary | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
-  
+
   // Filters
-  const [categoryFilter, setCategoryFilter] = useState('All');
-  const [industryFilter, setIndustryFilter] = useState('All');
-  const [riskFilter, setRiskFilter] = useState('All');
+  const [categoryFilter, setCategoryFilter] = useState("All");
+  const [industryFilter, setIndustryFilter] = useState("All");
+  const [riskFilter, setRiskFilter] = useState("All");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
@@ -64,13 +93,13 @@ export const ComplianceExplorer = () => {
     if (!selectedCountry) return;
 
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       const data = await complianceAPI.getSummaries(selectedCountry.name);
       setSummaries(data);
     } catch (err) {
-      setError('Failed to load compliance summaries. Please try again.');
+      setError("Failed to load compliance summaries. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -79,12 +108,14 @@ export const ComplianceExplorer = () => {
   const applyFilters = () => {
     let filtered = [...summaries];
 
-    if (categoryFilter !== 'All') {
+    if (categoryFilter !== "All") {
       filtered = filtered.filter((s) => s.category === categoryFilter);
     }
 
-    if (riskFilter !== 'All') {
-      filtered = filtered.filter((s) => s.riskLevel === riskFilter.toLowerCase());
+    if (riskFilter !== "All") {
+      filtered = filtered.filter(
+        (s) => s.riskLevel === riskFilter.toLowerCase()
+      );
     }
 
     setFilteredSummaries(filtered);
@@ -94,14 +125,17 @@ export const ComplianceExplorer = () => {
     if (!selectedCountry || !searchQuery.trim()) return;
 
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const result = await complianceAPI.search(selectedCountry.name, searchQuery);
+      const result = await complianceAPI.search(
+        selectedCountry.name,
+        searchQuery
+      );
       setSearchResult(result);
       addSearchHistory(searchQuery, selectedCountry.name);
     } catch (err) {
-      setError('Search failed. Please try again.');
+      setError("Search failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -129,27 +163,27 @@ export const ComplianceExplorer = () => {
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
-      case 'low':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'medium':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'high':
-        return 'bg-red-100 text-red-800 border-red-200';
+      case "low":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "medium":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "high":
+        return "bg-red-100 text-red-800 border-red-200";
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
   const getRiskGradient = (risk: string) => {
     switch (risk) {
-      case 'low':
-        return 'from-blue-500 to-blue-600';
-      case 'medium':
-        return 'from-yellow-500 to-yellow-600';
-      case 'high':
-        return 'from-red-500 to-red-600';
+      case "low":
+        return "from-blue-500 to-blue-600";
+      case "medium":
+        return "from-yellow-500 to-yellow-600";
+      case "high":
+        return "from-red-500 to-red-600";
       default:
-        return 'from-gray-500 to-gray-600';
+        return "from-gray-500 to-gray-600";
     }
   };
 
@@ -160,7 +194,7 @@ export const ComplianceExplorer = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -218,7 +252,7 @@ export const ComplianceExplorer = () => {
           {/* Sidebar Filters */}
           <aside
             className={`${
-              isSidebarOpen ? 'block' : 'hidden'
+              isSidebarOpen ? "block" : "hidden"
             } lg:block w-full lg:w-64 flex-shrink-0 space-y-4`}
           >
             <Card className="border-0 shadow-lg sticky top-24">
@@ -232,9 +266,9 @@ export const ComplianceExplorer = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Country</label>
                   <Select
-                    value={selectedCountry?.id || ''}
-                    onValueChange={(value) => {
-                      const country = COUNTRIES.find((c) => c.id === value);
+                    value={selectedCountry?.id || ""}
+                    onValueChange={(value: string) => {
+                      const country = countries.find((c) => c.id === value);
                       if (country) {
                         const { setSelectedCountry } = useApp();
                         setSelectedCountry(country);
@@ -245,7 +279,7 @@ export const ComplianceExplorer = () => {
                       <SelectValue placeholder="Select country" />
                     </SelectTrigger>
                     <SelectContent>
-                      {COUNTRIES.map((country) => (
+                      {countries.map((country) => (
                         <SelectItem key={country.id} value={country.id}>
                           {country.name}
                         </SelectItem>
@@ -258,7 +292,10 @@ export const ComplianceExplorer = () => {
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Category</label>
-                  <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+                  <Select
+                    value={categoryFilter}
+                    onValueChange={setCategoryFilter}
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -274,7 +311,10 @@ export const ComplianceExplorer = () => {
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Industry</label>
-                  <Select value={industryFilter} onValueChange={setIndustryFilter}>
+                  <Select
+                    value={industryFilter}
+                    onValueChange={setIndustryFilter}
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -307,9 +347,9 @@ export const ComplianceExplorer = () => {
                   variant="outline"
                   className="w-full"
                   onClick={() => {
-                    setCategoryFilter('All');
-                    setIndustryFilter('All');
-                    setRiskFilter('All');
+                    setCategoryFilter("All");
+                    setIndustryFilter("All");
+                    setRiskFilter("All");
                   }}
                 >
                   Clear Filters
@@ -329,7 +369,7 @@ export const ComplianceExplorer = () => {
 
             {/* Search Results */}
             {searchResult && (
-              <Card className="mb-8 border-0 shadow-lg bg-gradient-to-br from-primary/5 to-secondary/5">
+              <Card className="mb-8 border-0 shadow-lg bg-primary/5">
                 <div className="h-1 bg-gradient-to-r from-primary to-secondary rounded-t-lg" />
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -368,7 +408,8 @@ export const ComplianceExplorer = () => {
                                 {citation.title}
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                {citation.source} • {new Date(citation.date).toLocaleDateString()}
+                                {citation.source} •{" "}
+                                {new Date(citation.date).toLocaleDateString()}
                               </p>
                             </div>
                             <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
@@ -406,7 +447,8 @@ export const ComplianceExplorer = () => {
                     {selectedCountry?.name} Regulations
                   </h2>
                   <Badge variant="secondary">
-                    {filteredSummaries.length} result{filteredSummaries.length !== 1 ? 's' : ''}
+                    {filteredSummaries.length} result
+                    {filteredSummaries.length !== 1 ? "s" : ""}
                   </Badge>
                 </div>
 
@@ -417,19 +459,32 @@ export const ComplianceExplorer = () => {
                       key={summary.id}
                       className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
                     >
-                      <div className={`h-2 bg-gradient-to-r ${getRiskGradient(summary.riskLevel)}`} />
+                      <div
+                        className={`h-2 bg-gradient-to-r ${getRiskGradient(
+                          summary.riskLevel
+                        )}`}
+                      />
                       <CardHeader>
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-2">
-                              <Badge variant="outline">{summary.category}</Badge>
-                              <Badge className={getRiskColor(summary.riskLevel)}>
+                              <Badge variant="outline">
+                                {summary.category}
+                              </Badge>
+                              <Badge
+                                className={getRiskColor(summary.riskLevel)}
+                              >
                                 {summary.riskLevel.toUpperCase()} RISK
                               </Badge>
                             </div>
-                            <CardTitle className="text-xl">{summary.title}</CardTitle>
+                            <CardTitle className="text-xl">
+                              {summary.title}
+                            </CardTitle>
                             <CardDescription>
-                              Last updated: {new Date(summary.lastUpdated).toLocaleDateString()}
+                              Last updated:{" "}
+                              {new Date(
+                                summary.lastUpdated
+                              ).toLocaleDateString()}
                             </CardDescription>
                           </div>
                         </div>
@@ -438,7 +493,9 @@ export const ComplianceExplorer = () => {
                         <p className="text-foreground leading-relaxed">
                           {isExpanded
                             ? highlightKeywords(summary.summary)
-                            : highlightKeywords(summary.summary.slice(0, 200) + '...')}
+                            : highlightKeywords(
+                                summary.summary.slice(0, 200) + "..."
+                              )}
                         </p>
 
                         <div className="flex items-center justify-between pt-4 border-t">
@@ -477,16 +534,18 @@ export const ComplianceExplorer = () => {
               </div>
             )}
 
-            {!isLoading && filteredSummaries.length === 0 && selectedCountry && (
-              <Card className="border-0 shadow-lg">
-                <CardContent className="py-12 text-center">
-                  <Shield className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground">
-                    No regulations found matching your filters
-                  </p>
-                </CardContent>
-              </Card>
-            )}
+            {!isLoading &&
+              filteredSummaries.length === 0 &&
+              selectedCountry && (
+                <Card className="border-0 shadow-lg">
+                  <CardContent className="py-12 text-center">
+                    <Shield className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-muted-foreground">
+                      No regulations found matching your filters
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
           </div>
         </div>
       </div>

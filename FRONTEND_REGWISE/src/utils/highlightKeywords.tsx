@@ -1,26 +1,26 @@
 // Utility to highlight compliance keywords in text
-import React from 'react';
+import React from "react";
 
 const KEYWORDS = [
-  'KYC',
-  'AML',
-  'CTF',
-  'CDD',
-  'EDD',
-  'PEP',
-  'sanctions',
-  'threshold',
-  'beneficial ownership',
-  'due diligence',
-  'suspicious activity',
-  'transaction monitoring',
-  'risk assessment',
-  'compliance',
-  'regulation',
-  'GDPR',
-  'data protection',
-  'consent',
-  'reporting',
+  "KYC",
+  "AML",
+  "CTF",
+  "CDD",
+  "EDD",
+  "PEP",
+  "sanctions",
+  "threshold",
+  "beneficial ownership",
+  "due diligence",
+  "suspicious activity",
+  "transaction monitoring",
+  "risk assessment",
+  "compliance",
+  "regulation",
+  "GDPR",
+  "data protection",
+  "consent",
+  "reporting",
 ];
 
 export const highlightKeywords = (text: string): React.ReactNode[] => {
@@ -28,10 +28,7 @@ export const highlightKeywords = (text: string): React.ReactNode[] => {
   let lastIndex = 0;
 
   // Create a regex pattern that matches any of the keywords (case-insensitive)
-  const pattern = new RegExp(
-    `\\b(${KEYWORDS.join('|')})\\b`,
-    'gi'
-  );
+  const pattern = new RegExp(`\\b(${KEYWORDS.join("|")})\\b`, "gi");
 
   let match;
   while ((match = pattern.exec(text)) !== null) {

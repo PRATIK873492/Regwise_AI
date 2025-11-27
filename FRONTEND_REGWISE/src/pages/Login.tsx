@@ -1,17 +1,23 @@
-import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { ROUTES } from '../utils/constants';
-import { Lock, Mail, Shield, Sparkles, CheckCircle } from 'lucide-react';
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Alert, AlertDescription } from "../components/ui/alert";
+import { ROUTES } from "../utils/constants";
+import { Lock, Mail, Shield, Sparkles, CheckCircle } from "lucide-react";
 
 export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { login, isAuthenticated } = useAuth();
@@ -23,28 +29,31 @@ export const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setIsLoading(true);
 
     try {
       await login(email, password);
       navigate(ROUTES.HOME);
     } catch (err) {
-      setError('Invalid email or password. Please try again.');
+      setError("Invalid email or password. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const features = [
-    'AI-powered compliance insights',
-    'Global regulatory coverage',
-    'Real-time alert notifications',
-    'Automated workflow generation',
+    "AI-powered compliance insights",
+    "Global regulatory coverage",
+    "Real-time alert notifications",
+    "Automated workflow generation",
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary/95 to-secondary flex items-center justify-center p-4 relative overflow-hidden">
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--hero-background)" }}
+    >
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
@@ -63,14 +72,17 @@ export const Login = () => {
                 </div>
                 <div>
                   <h1 className="text-4xl font-bold">RegWise AI</h1>
-                  <p className="text-white/80 text-lg">Intelligent Compliance Platform</p>
+                  <p className="text-white/80 text-lg">
+                    Intelligent Compliance Platform
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="space-y-4">
               <p className="text-xl text-white/90">
-                Transform your compliance operations with AI-powered regulatory intelligence
+                Transform your compliance operations with AI-powered regulatory
+                intelligence
               </p>
               <div className="space-y-3">
                 {features.map((feature, index) => (
@@ -95,7 +107,7 @@ export const Login = () => {
             <Card className="border-0 shadow-2xl">
               <CardHeader className="space-y-1 pb-6">
                 <div className="flex justify-center lg:hidden mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
+                  <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center">
                     <Shield className="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -115,7 +127,10 @@ export const Login = () => {
                   )}
 
                   <div className="space-y-2">
-                    <label htmlFor="email" className="flex items-center space-x-2 text-foreground font-medium">
+                    <label
+                      htmlFor="email"
+                      className="flex items-center space-x-2 text-foreground font-medium"
+                    >
                       <Mail className="w-4 h-4" />
                       <span>Email Address</span>
                     </label>
@@ -132,7 +147,10 @@ export const Login = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="password" className="flex items-center space-x-2 text-foreground font-medium">
+                    <label
+                      htmlFor="password"
+                      className="flex items-center space-x-2 text-foreground font-medium"
+                    >
                       <Lock className="w-4 h-4" />
                       <span>Password</span>
                     </label>
@@ -159,7 +177,7 @@ export const Login = () => {
                         <span>Signing in...</span>
                       </span>
                     ) : (
-                      'Sign In'
+                      "Sign In"
                     )}
                   </Button>
 
@@ -168,7 +186,9 @@ export const Login = () => {
                       <div className="w-full border-t border-border" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                      <span className="bg-white px-2 text-muted-foreground">Demo Access</span>
+                      <span className="bg-white px-2 text-muted-foreground">
+                        Demo Access
+                      </span>
                     </div>
                   </div>
 
@@ -180,7 +200,8 @@ export const Login = () => {
                           Quick Demo Access
                         </p>
                         <p className="text-xs text-blue-700">
-                          Use any email and password combination to explore the platform
+                          Use any email and password combination to explore the
+                          platform
                         </p>
                       </div>
                     </div>

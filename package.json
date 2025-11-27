@@ -1,0 +1,13 @@
+{
+  "name": "RegWise AI",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail -n BACKEND,FRONTEND \"npm --prefix ./regwise-backend run dev\" \"npm --prefix ./FRONTEND_REGWISE run dev\"",
+    "install-all": "npm --prefix ./regwise-backend install && npm --prefix ./FRONTEND_REGWISE install",
+    "docker:up": "docker compose up --build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

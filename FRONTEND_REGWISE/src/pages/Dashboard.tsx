@@ -1,36 +1,58 @@
-import { useState, useEffect } from 'react';
-import { dashboardAPI } from '../services/api';
-import { DashboardMetrics } from '../types';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Skeleton } from '../components/ui/skeleton';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { Badge } from '../components/ui/badge';
+import { useState, useEffect } from "react";
+import { dashboardAPI } from "../services/api";
+import { DashboardMetrics } from "../types";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Skeleton } from "../components/ui/skeleton";
+import { Alert, AlertDescription } from "../components/ui/alert";
+import { Badge } from "../components/ui/badge";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../components/ui/select';
-import { 
-  LayoutDashboard, 
-  TrendingUp, 
-  AlertCircle, 
+} from "../components/ui/select";
+import {
+  LayoutDashboard,
+  TrendingUp,
+  AlertCircle,
   Globe,
   Bell,
   Activity,
   PieChart as PieChartIcon,
   BarChart3,
   ArrowUp,
-  ArrowDown
-} from 'lucide-react';
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, Area, AreaChart } from 'recharts';
+  ArrowDown,
+} from "lucide-react";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  LineChart,
+  Line,
+  Area,
+  AreaChart,
+} from "recharts";
 
 export const Dashboard = () => {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [timeFilter, setTimeFilter] = useState('7d');
+  const [error, setError] = useState("");
+  const [timeFilter, setTimeFilter] = useState("7d");
 
   useEffect(() => {
     loadMetrics();
@@ -38,13 +60,13 @@ export const Dashboard = () => {
 
   const loadMetrics = async () => {
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       const data = await dashboardAPI.getMetrics();
       setMetrics(data);
     } catch (err) {
-      setError('Failed to load dashboard metrics. Please try again.');
+      setError("Failed to load dashboard metrics. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -52,37 +74,53 @@ export const Dashboard = () => {
 
   const riskData = metrics
     ? [
-        { name: 'Low Risk', value: metrics.riskBreakdown.low, color: '#3B82F6' },
-        { name: 'Medium Risk', value: metrics.riskBreakdown.medium, color: '#F59E0B' },
-        { name: 'High Risk', value: metrics.riskBreakdown.high, color: '#EF4444' },
+        {
+          name: "Low Risk",
+          value: metrics.riskBreakdown.low,
+          color: "#3B82F6",
+        },
+        {
+          name: "Medium Risk",
+          value: metrics.riskBreakdown.medium,
+          color: "#F59E0B",
+        },
+        {
+          name: "High Risk",
+          value: metrics.riskBreakdown.high,
+          color: "#EF4444",
+        },
       ]
     : [];
 
   const chartData = metrics
     ? [
-        { name: 'Low', value: metrics.riskBreakdown.low, fill: '#3B82F6' },
-        { name: 'Medium', value: metrics.riskBreakdown.medium, fill: '#F59E0B' },
-        { name: 'High', value: metrics.riskBreakdown.high, fill: '#EF4444' },
+        { name: "Low", value: metrics.riskBreakdown.low, fill: "#3B82F6" },
+        {
+          name: "Medium",
+          value: metrics.riskBreakdown.medium,
+          fill: "#F59E0B",
+        },
+        { name: "High", value: metrics.riskBreakdown.high, fill: "#EF4444" },
       ]
     : [];
 
   // Mock trend data for line chart
   const trendData = [
-    { month: 'Jan', alerts: 8, compliance: 82 },
-    { month: 'Feb', alerts: 12, compliance: 85 },
-    { month: 'Mar', alerts: 10, compliance: 84 },
-    { month: 'Apr', alerts: 15, compliance: 86 },
-    { month: 'May', alerts: 11, compliance: 87 },
-    { month: 'Jun', alerts: 9, compliance: 88 },
+    { month: "Jan", alerts: 8, compliance: 82 },
+    { month: "Feb", alerts: 12, compliance: 85 },
+    { month: "Mar", alerts: 10, compliance: 84 },
+    { month: "Apr", alerts: 15, compliance: 86 },
+    { month: "May", alerts: 11, compliance: 87 },
+    { month: "Jun", alerts: 9, compliance: 88 },
   ];
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'search':
+      case "search":
         return <Activity className="w-4 h-4 text-blue-600" />;
-      case 'alert':
+      case "alert":
         return <Bell className="w-4 h-4 text-orange-600" />;
-      case 'update':
+      case "update":
         return <TrendingUp className="w-4 h-4 text-green-600" />;
       default:
         return <Activity className="w-4 h-4 text-gray-600" />;
@@ -90,15 +128,15 @@ export const Dashboard = () => {
   };
 
   const getComplianceScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 80) return "text-green-600";
+    if (score >= 60) return "text-yellow-600";
+    return "text-red-600";
   };
 
   const getComplianceGradient = (score: number) => {
-    if (score >= 80) return 'from-green-500 to-emerald-500';
-    if (score >= 60) return 'from-yellow-500 to-orange-500';
-    return 'from-red-500 to-red-600';
+    if (score >= 80) return "from-green-500 to-emerald-500";
+    if (score >= 60) return "from-yellow-500 to-orange-500";
+    return "from-red-500 to-red-600";
   };
 
   return (
@@ -108,7 +146,7 @@ export const Dashboard = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
                 <LayoutDashboard className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -162,13 +200,18 @@ export const Dashboard = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <Globe className="w-8 h-8 text-blue-600" />
-                    <Badge variant="secondary" className="bg-blue-200 text-blue-800">
+                    <Badge
+                      variant="secondary"
+                      className="bg-blue-200 text-blue-800"
+                    >
                       <ArrowUp className="w-3 h-3 mr-1" />
                       +2
                     </Badge>
                   </div>
                   <p className="text-sm text-blue-800 mb-1">Total Countries</p>
-                  <p className="text-3xl font-bold text-blue-900">{metrics.totalCountries}</p>
+                  <p className="text-3xl font-bold text-blue-900">
+                    {metrics.totalCountries}
+                  </p>
                 </CardContent>
               </Card>
 
@@ -177,13 +220,18 @@ export const Dashboard = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <Bell className="w-8 h-8 text-orange-600" />
-                    <Badge variant="secondary" className="bg-orange-200 text-orange-800">
+                    <Badge
+                      variant="secondary"
+                      className="bg-orange-200 text-orange-800"
+                    >
                       <ArrowUp className="w-3 h-3 mr-1" />
                       +3
                     </Badge>
                   </div>
                   <p className="text-sm text-orange-800 mb-1">Active Alerts</p>
-                  <p className="text-3xl font-bold text-orange-900">{metrics.activeAlerts}</p>
+                  <p className="text-3xl font-bold text-orange-900">
+                    {metrics.activeAlerts}
+                  </p>
                 </CardContent>
               </Card>
 
@@ -192,13 +240,22 @@ export const Dashboard = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-2">
                     <TrendingUp className="w-8 h-8 text-green-600" />
-                    <Badge variant="secondary" className="bg-green-200 text-green-800">
+                    <Badge
+                      variant="secondary"
+                      className="bg-green-200 text-green-800"
+                    >
                       <ArrowUp className="w-3 h-3 mr-1" />
                       +5%
                     </Badge>
                   </div>
-                  <p className="text-sm text-green-800 mb-1">Compliance Score</p>
-                  <p className={`text-3xl font-bold ${getComplianceScoreColor(metrics.complianceScore)}`}>
+                  <p className="text-sm text-green-800 mb-1">
+                    Compliance Score
+                  </p>
+                  <p
+                    className={`text-3xl font-bold ${getComplianceScoreColor(
+                      metrics.complianceScore
+                    )}`}
+                  >
                     {metrics.complianceScore}%
                   </p>
                 </CardContent>
@@ -253,10 +310,10 @@ export const Dashboard = () => {
                         </Pie>
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: 'white',
-                            border: '1px solid #e5e7eb',
-                            borderRadius: '8px',
-                            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                            backgroundColor: "white",
+                            border: "1px solid #e5e7eb",
+                            borderRadius: "8px",
+                            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                           }}
                         />
                       </PieChart>
@@ -264,15 +321,22 @@ export const Dashboard = () => {
                   </div>
                   <div className="grid grid-cols-3 gap-4 mt-4">
                     {riskData.map((item, index) => (
-                      <div key={index} className="text-center p-3 bg-muted/50 rounded-lg">
+                      <div
+                        key={index}
+                        className="text-center p-3 bg-muted/50 rounded-lg"
+                      >
                         <div className="flex items-center justify-center space-x-2 mb-1">
                           <div
                             className="w-3 h-3 rounded-full"
                             style={{ backgroundColor: item.color }}
                           />
-                          <span className="text-sm font-medium">{item.name.split(' ')[0]}</span>
+                          <span className="text-sm font-medium">
+                            {item.name.split(" ")[0]}
+                          </span>
                         </div>
-                        <p className="text-xl font-bold text-foreground">{item.value}</p>
+                        <p className="text-xl font-bold text-foreground">
+                          {item.value}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -287,7 +351,9 @@ export const Dashboard = () => {
                     <BarChart3 className="w-5 h-5 text-secondary" />
                     <span>Risk Analysis</span>
                   </CardTitle>
-                  <CardDescription>Requirements by risk category</CardDescription>
+                  <CardDescription>
+                    Requirements by risk category
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="h-80">
@@ -298,10 +364,10 @@ export const Dashboard = () => {
                         <YAxis stroke="#6b7280" />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: 'white',
-                            border: '1px solid #e5e7eb',
-                            borderRadius: '8px',
-                            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                            backgroundColor: "white",
+                            border: "1px solid #e5e7eb",
+                            borderRadius: "8px",
+                            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                           }}
                         />
                         <Bar dataKey="value" radius={[8, 8, 0, 0]} />
@@ -320,20 +386,50 @@ export const Dashboard = () => {
                   <TrendingUp className="w-5 h-5 text-accent" />
                   <span>Compliance Trends</span>
                 </CardTitle>
-                <CardDescription>Alerts and compliance score over time</CardDescription>
+                <CardDescription>
+                  Alerts and compliance score over time
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-80">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={trendData}>
                       <defs>
-                        <linearGradient id="colorAlerts" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#FFA500" stopOpacity={0.8} />
-                          <stop offset="95%" stopColor="#FFA500" stopOpacity={0} />
+                        <linearGradient
+                          id="colorAlerts"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#FFA500"
+                            stopOpacity={0.8}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#FFA500"
+                            stopOpacity={0}
+                          />
                         </linearGradient>
-                        <linearGradient id="colorCompliance" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#00BFA6" stopOpacity={0.8} />
-                          <stop offset="95%" stopColor="#00BFA6" stopOpacity={0} />
+                        <linearGradient
+                          id="colorCompliance"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#00BFA6"
+                            stopOpacity={0.8}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#00BFA6"
+                            stopOpacity={0}
+                          />
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -341,10 +437,10 @@ export const Dashboard = () => {
                       <YAxis stroke="#6b7280" />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: 'white',
-                          border: '1px solid #e5e7eb',
-                          borderRadius: '8px',
-                          boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                          backgroundColor: "white",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                         }}
                       />
                       <Legend />
@@ -378,7 +474,9 @@ export const Dashboard = () => {
                   <Activity className="w-5 h-5 text-primary" />
                   <span>Recent Activity</span>
                 </CardTitle>
-                <CardDescription>Latest actions in your workspace</CardDescription>
+                <CardDescription>
+                  Latest actions in your workspace
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -386,14 +484,16 @@ export const Dashboard = () => {
                     <div
                       key={activity.id}
                       className={`flex items-start space-x-4 p-4 rounded-lg transition-all duration-300 hover:shadow-md ${
-                        index % 2 === 0 ? 'bg-muted/30' : 'bg-muted/10'
+                        index % 2 === 0 ? "bg-muted/30" : "bg-muted/10"
                       }`}
                     >
                       <div className="flex-shrink-0 mt-1">
                         {getActivityIcon(activity.type)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-foreground font-medium">{activity.description}</p>
+                        <p className="text-foreground font-medium">
+                          {activity.description}
+                        </p>
                         <div className="flex items-center space-x-3 mt-1">
                           <p className="text-sm text-muted-foreground">
                             {new Date(activity.timestamp).toLocaleString()}

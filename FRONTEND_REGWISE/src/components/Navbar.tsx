@@ -1,9 +1,9 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { ROUTES } from '../utils/constants';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { ROUTES } from "../utils/constants";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,39 +11,39 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
-import { 
-  Home, 
-  Search, 
-  ClipboardList, 
-  Bell, 
-  LayoutDashboard, 
+} from "./ui/dropdown-menu";
+import {
+  Home,
+  Search,
+  ClipboardList,
+  Bell,
+  LayoutDashboard,
   LogOut,
   Menu,
   X,
   User,
   Settings,
   HelpCircle,
-  Shield
-} from 'lucide-react';
+  Shield,
+} from "lucide-react";
 
 export const Navbar = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   if (!isAuthenticated) {
     return null;
   }
 
   const navLinks = [
-    { to: ROUTES.HOME, label: 'Home', icon: Home },
-    { to: ROUTES.EXPLORER, label: 'Explorer', icon: Search },
-    { to: ROUTES.ONBOARDING, label: 'Onboarding', icon: ClipboardList },
-    { to: ROUTES.ALERTS, label: 'Alerts', icon: Bell },
-    { to: ROUTES.DASHBOARD, label: 'Dashboard', icon: LayoutDashboard },
+    { to: ROUTES.HOME, label: "Home", icon: Home },
+    { to: ROUTES.EXPLORER, label: "Explorer", icon: Search },
+    { to: ROUTES.ONBOARDING, label: "Onboarding", icon: ClipboardList },
+    { to: ROUTES.ALERTS, label: "Alerts", icon: Bell },
+    { to: ROUTES.DASHBOARD, label: "Dashboard", icon: LayoutDashboard },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -52,12 +52,12 @@ export const Navbar = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(ROUTES.EXPLORER, { state: { query: searchQuery } });
-      setSearchQuery('');
+      setSearchQuery("");
     }
   };
 
   const getUserInitials = () => {
-    if (!user?.email) return 'U';
+    if (!user?.email) return "U";
     return user.email.substring(0, 2).toUpperCase();
   };
 
@@ -67,12 +67,17 @@ export const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center space-x-8">
             {/* Logo */}
-            <Link to={ROUTES.HOME} className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary via-primary to-secondary rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+            <Link
+              to={ROUTES.HOME}
+              className="flex items-center space-x-3 group"
+            >
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-sm transition-all duration-300 group-hover:scale-105">
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <div className="hidden sm:block">
-                <span className="font-semibold text-lg text-foreground">RegWise</span>
+                <span className="font-semibold text-lg text-foreground">
+                  RegWise
+                </span>
                 <span className="text-sm text-secondary ml-1">AI</span>
               </div>
             </Link>
@@ -88,8 +93,8 @@ export const Navbar = () => {
                     to={link.to}
                     className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-all duration-200 ${
                       active
-                        ? 'bg-primary text-white shadow-md'
-                        : 'text-foreground hover:bg-muted hover:text-primary'
+                        ? "text-primary border-b-2 border-underline"
+                        : "text-foreground hover:text-primary"
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -119,7 +124,7 @@ export const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="relative h-10 w-10 rounded-full bg-gradient-to-br from-primary to-secondary text-white hover:shadow-lg transition-all duration-200"
+                  className="relative h-10 w-10 rounded-full bg-primary text-white hover:shadow-md transition-all duration-200"
                 >
                   <span className="font-medium">{getUserInitials()}</span>
                 </Button>
@@ -127,8 +132,10 @@ export const Navbar = () => {
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>
                   <div className="flex flex-col space-y-1">
-                    <p className="font-medium">{user?.name || 'User'}</p>
-                    <p className="text-xs text-muted-foreground">{user?.email}</p>
+                    <p className="font-medium">{user?.name || "User"}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {user?.email}
+                    </p>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
@@ -145,7 +152,10 @@ export const Navbar = () => {
                   Help & Support
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout} className="cursor-pointer text-destructive">
+                <DropdownMenuItem
+                  onClick={logout}
+                  className="cursor-pointer text-destructive"
+                >
                   <LogOut className="w-4 h-4 mr-2" />
                   Logout
                 </DropdownMenuItem>
@@ -191,8 +201,8 @@ export const Navbar = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
                     active
-                      ? 'bg-primary text-white shadow-md'
-                      : 'text-foreground hover:bg-muted'
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
                   }`}
                 >
                   <Icon className="w-5 h-5" />

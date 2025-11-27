@@ -10,16 +10,25 @@ import userRoutes from "./routes/users";
 import itemRoutes from "./routes/items";
 import uploadRoutes from "./routes/upload";
 import aiRoutes from "./routes/ai";
+import searchRoutes from "./routes/search";
+import alertsRoutes from "./routes/alerts";
+import dashboardRoutes from "./routes/dashboard";
+import countryRoutes from "./routes/countries";
 
 dotenv.config();
 
 const app = express();
+import alertsRoutes from "./routes/alerts";
+import searchRoutes from "./routes/search";
+import dashboardRoutes from "./routes/dashboard";
 app.use(helmet());
 app.use(express.json({ limit: "8mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN;
-const allowedOrigins = FRONTEND_ORIGIN ? FRONTEND_ORIGIN.split(',') : ['http://localhost:3000', 'http://localhost:3001'];
+const allowedOrigins = FRONTEND_ORIGIN
+  ? FRONTEND_ORIGIN.split(",")
+  : ["http://localhost:3000", "http://localhost:3001"];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 // routes
@@ -28,9 +37,18 @@ app.use("/api/users", userRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/alerts", alertsRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/countries", countryRoutes);
 
+app.use("/api/alerts", alertsRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 // health
-app.get("/api/health", (_req, res) => res.json({ ok: true, time: new Date().toISOString() }));
+app.get("/api/health", (_req, res) =>
+  res.json({ ok: true, time: new Date().toISOString() })
+);
 
 // serve uploads statically
 const uploadsPath = path.join(process.cwd(), "uploads");

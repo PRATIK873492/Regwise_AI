@@ -5,6 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "seed": "ts-node src/seed/seed.ts",
+    "seed:alerts": "ts-node src/seed/seed-alerts.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint . --ext .ts"
@@ -32,6 +34,7 @@
     "@types/multer": "^1.4.7",
     "@types/node": "^20.5.3",
     "ts-node-dev": "^2.0.0",
+    "mongodb-memory-server": "^8.11.0",
     "typescript": "^5.5.6"
   }
 }

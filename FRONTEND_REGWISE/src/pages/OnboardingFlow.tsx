@@ -1,37 +1,50 @@
-import { useState, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
-import { onboardingAPI } from '../services/api';
-import { OnboardingWorkflow } from '../types';
-import { CountrySelector } from '../components/CountrySelector';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Skeleton } from '../components/ui/skeleton';
-import { Alert, AlertDescription } from '../components/ui/alert';
+import { useState, useEffect } from "react";
+import { useApp } from "../context/AppContext";
+import { onboardingAPI } from "../services/api";
+import { OnboardingWorkflow } from "../types";
+import { CountrySelector } from "../components/CountrySelector";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Skeleton } from "../components/ui/skeleton";
+import { Alert, AlertDescription } from "../components/ui/alert";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../components/ui/tooltip';
-import { 
-  ClipboardList, 
-  CheckCircle, 
-  Clock, 
-  FileText, 
+} from "../components/ui/tooltip";
+import {
+  ClipboardList,
+  CheckCircle,
+  Clock,
+  FileText,
   Download,
   AlertCircle,
   ChevronRight,
   Shield,
-  Sparkles
-} from 'lucide-react';
+  Sparkles,
+} from "lucide-react";
 
 export const OnboardingFlow = () => {
   const { selectedCountry } = useApp();
   const [workflow, setWorkflow] = useState<OnboardingWorkflow | null>(null);
+  const [draftWorkflow, setDraftWorkflow] = useState<OnboardingWorkflow | null>(
+    null
+  );
+  const [editMode, setEditMode] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [exportLoading, setExportLoading] = useState<'pdf' | 'json' | null>(null);
+  const [error, setError] = useState("");
+  const [exportLoading, setExportLoading] = useState<"pdf" | "json" | null>(
+    null
+  );
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -44,38 +57,101 @@ export const OnboardingFlow = () => {
     if (!selectedCountry) return;
 
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       const data = await onboardingAPI.getWorkflow(selectedCountry.name);
       setWorkflow(data);
+      setDraftWorkflow(data);
     } catch (err) {
-      setError('Failed to load onboarding workflow. Please try again.');
+      setError("Failed to load onboarding workflow. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleExport = async (format: 'pdf' | 'json') => {
+  const startEdit = () => {
+    setDraftWorkflow(workflow);
+    setEditMode(true);
+  };
+
+  const cancelEdit = () => {
+    setDraftWorkflow(workflow);
+    setEditMode(false);
+  };
+
+  const addStep = () => {
+    if (!draftWorkflow) return;
+    const newStep = {
+      id: `${selectedCountry?.code || "c"}-step-${Date.now()}`,
+      stepNumber: draftWorkflow.steps.length + 1,
+      title: "New Step",
+      description: "",
+      required: false,
+      documents: [],
+      threshold: undefined,
+      conditions: [],
+      estimatedTime: undefined,
+    } as any;
+    const newWorkflow = {
+      ...draftWorkflow,
+      steps: [...draftWorkflow.steps, newStep],
+    };
+    setDraftWorkflow(newWorkflow);
+  };
+
+  const deleteStep = (stepId: string) => {
+    if (!draftWorkflow) return;
+    const steps = draftWorkflow.steps.filter((s) => s.id !== stepId);
+    const renumbered = steps.map((s, idx) => ({ ...s, stepNumber: idx + 1 }));
+    setDraftWorkflow({ ...draftWorkflow, steps: renumbered });
+  };
+
+  const updateStepField = (stepId: string, field: string, value: any) => {
+    if (!draftWorkflow) return;
+    const steps = draftWorkflow.steps.map((s) => {
+      if (s.id !== stepId) return s;
+      return { ...s, [field]: value };
+    });
+    setDraftWorkflow({ ...draftWorkflow, steps });
+  };
+
+  const saveWorkflow = async () => {
+    if (!selectedCountry || !draftWorkflow) return;
+    setIsSaving(true);
+    try {
+      await onboardingAPI.saveWorkflow(selectedCountry.code, draftWorkflow);
+      setWorkflow(draftWorkflow);
+      setEditMode(false);
+    } catch (err) {
+      setError("Failed saving workflow. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleExport = async (format: "pdf" | "json") => {
     if (!selectedCountry || !workflow) return;
 
     setExportLoading(format);
 
     try {
-      if (format === 'json') {
+      if (format === "json") {
         const jsonData = JSON.stringify(workflow, null, 2);
-        const blob = new Blob([jsonData], { type: 'application/json' });
+        const blob = new Blob([jsonData], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = url;
-        a.download = `onboarding-workflow-${selectedCountry.code}-${Date.now()}.json`;
+        a.download = `onboarding-workflow-${
+          selectedCountry.code
+        }-${Date.now()}.json`;
         a.click();
         URL.revokeObjectURL(url);
       } else {
-        alert('PDF export would download here. Backend integration required.');
+        alert("PDF export would download here. Backend integration required.");
       }
     } catch (err) {
-      setError('Export failed. Please try again.');
+      setError("Export failed. Please try again.");
     } finally {
       setExportLoading(null);
     }
@@ -91,8 +167,9 @@ export const OnboardingFlow = () => {
     setCompletedSteps(newCompleted);
   };
 
-  const completionPercentage = workflow
-    ? (completedSteps.size / workflow.steps.length) * 100
+  const currentWorkflow = editMode && draftWorkflow ? draftWorkflow : workflow;
+  const completionPercentage = currentWorkflow
+    ? (completedSteps.size / currentWorkflow.steps.length) * 100
     : 0;
 
   return (
@@ -161,14 +238,43 @@ export const OnboardingFlow = () => {
                       <span>Workflow Overview</span>
                     </CardTitle>
                     <CardDescription className="mt-2">
-                      {workflow.country} • {workflow.complianceLevel} Level
+                      {currentWorkflow?.country} •{" "}
+                      {currentWorkflow?.complianceLevel} Level
                     </CardDescription>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex items-center gap-3">
                     <div className="text-3xl font-bold text-secondary">
                       {completionPercentage.toFixed(0)}%
                     </div>
                     <p className="text-sm text-muted-foreground">Complete</p>
+                    {!editMode ? (
+                      <div>
+                        <Button
+                          size="sm"
+                          onClick={startEdit}
+                          className="bg-white"
+                        >
+                          Edit Workflow
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={cancelEdit}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          size="sm"
+                          onClick={saveWorkflow}
+                          disabled={isSaving}
+                        >
+                          {isSaving ? "Saving..." : "Save Workflow"}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </CardHeader>
@@ -187,22 +293,78 @@ export const OnboardingFlow = () => {
                   <div className="flex items-center space-x-3 p-4 bg-white rounded-lg">
                     <Clock className="w-8 h-8 text-secondary" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Estimated Time</p>
-                      <p className="font-semibold text-foreground">{workflow.estimatedTime}</p>
+                      <p className="text-sm text-muted-foreground">
+                        Estimated Time
+                      </p>
+                      {editMode ? (
+                        <input
+                          value={draftWorkflow?.estimatedTime || ""}
+                          onChange={(e) =>
+                            setDraftWorkflow(
+                              (prev) =>
+                                ({
+                                  ...(prev || {}),
+                                  estimatedTime: e.target.value,
+                                } as OnboardingWorkflow)
+                            )
+                          }
+                          className="border px-2 py-1 rounded text-sm w-full"
+                        />
+                      ) : (
+                        <p className="font-semibold text-foreground">
+                          {currentWorkflow?.estimatedTime}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center space-x-3 p-4 bg-white rounded-lg">
                     <FileText className="w-8 h-8 text-secondary" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Total Steps</p>
-                      <p className="font-semibold text-foreground">{workflow.steps.length}</p>
+                      <p className="text-sm text-muted-foreground">
+                        Total Steps
+                      </p>
+                      <p className="font-semibold text-foreground">
+                        {(draftWorkflow || workflow)?.steps.length}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3 p-4 bg-white rounded-lg">
                     <Shield className="w-8 h-8 text-secondary" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Compliance</p>
-                      <p className="font-semibold text-foreground">{workflow.complianceLevel}</p>
+                      <p className="text-sm text-muted-foreground">
+                        Compliance
+                      </p>
+                      {editMode ? (
+                        <select
+                          value={
+                            draftWorkflow?.complianceLevel ||
+                            (workflow.complianceLevel as any)
+                          }
+                          onChange={(e) =>
+                            setDraftWorkflow(
+                              (prev) =>
+                                ({
+                                  ...(prev || {}),
+                                  complianceLevel: e.target.value,
+                                } as OnboardingWorkflow)
+                            )
+                          }
+                          className="border px-2 py-1 rounded text-sm"
+                        >
+                          <option value="basic">Basic</option>
+                          <option value="intermediate">Intermediate</option>
+                          <option value="advanced">Advanced</option>
+                          <option
+                            value={currentWorkflow?.complianceLevel as any}
+                          >
+                            {currentWorkflow?.complianceLevel}
+                          </option>
+                        </select>
+                      ) : (
+                        <p className="font-semibold text-foreground">
+                          {currentWorkflow?.complianceLevel}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -210,22 +372,29 @@ export const OnboardingFlow = () => {
                 <div className="flex gap-2 pt-4 border-t border-white/50">
                   <Button
                     variant="outline"
-                    onClick={() => handleExport('json')}
+                    onClick={() => handleExport("json")}
                     disabled={!!exportLoading}
                     className="bg-white hover:bg-white/80"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    {exportLoading === 'json' ? 'Exporting...' : 'Export JSON'}
+                    {exportLoading === "json" ? "Exporting..." : "Export JSON"}
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => handleExport('pdf')}
+                    onClick={() => handleExport("pdf")}
                     disabled={!!exportLoading}
                     className="bg-white hover:bg-white/80"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    {exportLoading === 'pdf' ? 'Exporting...' : 'Export PDF'}
+                    {exportLoading === "pdf" ? "Exporting..." : "Export PDF"}
                   </Button>
+                  {editMode && (
+                    <div className="ml-auto">
+                      <Button variant="default" size="sm" onClick={addStep}>
+                        Add Step
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -236,21 +405,21 @@ export const OnboardingFlow = () => {
               <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-secondary via-teal-600 to-secondary hidden md:block" />
 
               <div className="space-y-6">
-                {workflow.steps.map((step, index) => {
+                {(draftWorkflow || workflow).steps.map((step, index) => {
                   const isCompleted = completedSteps.has(step.id);
                   return (
                     <Card
                       key={step.id}
                       className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ml-0 md:ml-16 ${
-                        isCompleted ? 'bg-secondary/5' : ''
+                        isCompleted ? "bg-secondary/5" : ""
                       }`}
                     >
                       {/* Step Number Circle */}
                       <div
                         className={`absolute -left-16 top-8 w-12 h-12 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-lg hidden md:flex ${
                           isCompleted
-                            ? 'bg-gradient-to-br from-secondary to-teal-600 text-white'
-                            : 'bg-white text-foreground'
+                            ? "bg-gradient-to-br from-secondary to-teal-600 text-white"
+                            : "bg-white text-foreground"
                         }`}
                       >
                         {isCompleted ? (
@@ -264,32 +433,98 @@ export const OnboardingFlow = () => {
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-3">
-                              <Badge
-                                variant={step.required ? 'default' : 'secondary'}
-                                className={step.required ? 'bg-red-100 text-red-800' : ''}
-                              >
-                                {step.required ? 'Required' : 'Optional'}
-                              </Badge>
+                              {editMode ? (
+                                <label className="flex items-center space-x-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={!!step.required}
+                                    onChange={(e) =>
+                                      updateStepField(
+                                        step.id,
+                                        "required",
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                  <span className="text-sm">Required</span>
+                                </label>
+                              ) : (
+                                <Badge
+                                  variant={
+                                    step.required ? "default" : "secondary"
+                                  }
+                                  className={
+                                    step.required
+                                      ? "bg-red-100 text-red-800"
+                                      : ""
+                                  }
+                                >
+                                  {step.required ? "Required" : "Optional"}
+                                </Badge>
+                              )}
                               <span className="md:hidden text-sm font-bold text-muted-foreground">
                                 Step {step.stepNumber}
                               </span>
                             </div>
-                            <CardTitle className="text-xl">{step.title}</CardTitle>
-                            <CardDescription className="mt-2">
-                              {step.description}
-                            </CardDescription>
+                            {editMode ? (
+                              <div>
+                                <input
+                                  value={step.title}
+                                  onChange={(e) =>
+                                    updateStepField(
+                                      step.id,
+                                      "title",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="border px-2 py-1 rounded w-full mb-2"
+                                />
+                                <textarea
+                                  value={step.description || ""}
+                                  onChange={(e) =>
+                                    updateStepField(
+                                      step.id,
+                                      "description",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="border px-2 py-1 rounded w-full mb-2"
+                                />
+                                <input
+                                  placeholder="Estimated Time (e.g., 5-10 mins)"
+                                  value={step.estimatedTime || ""}
+                                  onChange={(e) =>
+                                    updateStepField(
+                                      step.id,
+                                      "estimatedTime",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="border px-2 py-1 rounded w-full"
+                                />
+                              </div>
+                            ) : (
+                              <>
+                                <CardTitle className="text-xl">
+                                  {step.title}
+                                </CardTitle>
+                                <CardDescription className="mt-2">
+                                  {step.description}
+                                </CardDescription>
+                              </>
+                            )}
                           </div>
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button
-                                  variant={isCompleted ? 'default' : 'outline'}
+                                  variant={isCompleted ? "default" : "outline"}
                                   size="sm"
                                   onClick={() => toggleStepCompletion(step.id)}
                                   className={
                                     isCompleted
-                                      ? 'bg-gradient-to-r from-secondary to-teal-600'
-                                      : ''
+                                      ? "bg-gradient-to-r from-secondary to-teal-600"
+                                      : ""
                                   }
                                 >
                                   {isCompleted ? (
@@ -300,10 +535,22 @@ export const OnboardingFlow = () => {
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p>Mark as {isCompleted ? 'incomplete' : 'complete'}</p>
+                                <p>
+                                  Mark as{" "}
+                                  {isCompleted ? "incomplete" : "complete"}
+                                </p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
+                          {editMode && (
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => deleteStep(step.id)}
+                            >
+                              Delete
+                            </Button>
+                          )}
                         </div>
                       </CardHeader>
                       <CardContent className="space-y-4">
@@ -314,45 +561,100 @@ export const OnboardingFlow = () => {
                             <span>Required Documents</span>
                           </h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {step.documents.map((doc, docIndex) => (
-                              <div
-                                key={docIndex}
-                                className="flex items-center space-x-2 text-sm p-2 bg-white rounded"
-                              >
-                                <ChevronRight className="w-4 h-4 text-secondary flex-shrink-0" />
-                                <span className="text-foreground">{doc}</span>
-                              </div>
-                            ))}
+                            {editMode ? (
+                              <textarea
+                                className="border p-2 rounded w-full"
+                                value={(step.documents || []).join(", ")}
+                                onChange={(e) =>
+                                  updateStepField(
+                                    step.id,
+                                    "documents",
+                                    e.target.value
+                                      .split(",")
+                                      .map((s) => s.trim())
+                                      .filter(Boolean)
+                                  )
+                                }
+                              />
+                            ) : (
+                              step.documents?.map((doc, docIndex) => (
+                                <div
+                                  key={docIndex}
+                                  className="flex items-center space-x-2 text-sm p-2 bg-white rounded"
+                                >
+                                  <ChevronRight className="w-4 h-4 text-secondary flex-shrink-0" />
+                                  <span className="text-foreground">{doc}</span>
+                                </div>
+                              ))
+                            )}
                           </div>
                         </div>
 
                         {/* Threshold */}
-                        {step.threshold && (
+                        {(editMode || step.threshold) && (
                           <div className="flex items-start space-x-3 p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
                             <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-blue-900">Threshold</p>
-                              <p className="text-sm text-blue-800">{step.threshold}</p>
+                              <p className="font-medium text-blue-900">
+                                Threshold
+                              </p>
+                              {editMode ? (
+                                <input
+                                  className="border px-2 py-1 rounded text-sm"
+                                  value={step.threshold || ""}
+                                  onChange={(e) =>
+                                    updateStepField(
+                                      step.id,
+                                      "threshold",
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <p className="text-sm text-blue-800">
+                                  {step.threshold}
+                                </p>
+                              )}
                             </div>
                           </div>
                         )}
 
                         {/* Conditions */}
-                        {step.conditions && step.conditions.length > 0 && (
+                        {(editMode ||
+                          (step.conditions && step.conditions.length > 0)) && (
                           <div className="p-4 bg-amber-50 border-l-4 border-amber-500 rounded">
                             <h4 className="font-medium text-amber-900 mb-2">
                               Conditional Requirements
                             </h4>
                             <ul className="space-y-1">
-                              {step.conditions.map((condition, condIndex) => (
-                                <li
-                                  key={condIndex}
-                                  className="flex items-start space-x-2 text-sm text-amber-800"
-                                >
-                                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                                  <span>{condition}</span>
+                              {editMode ? (
+                                <li>
+                                  <input
+                                    className="border px-2 py-1 rounded w-full"
+                                    value={(step.conditions || []).join(", ")}
+                                    onChange={(e) =>
+                                      updateStepField(
+                                        step.id,
+                                        "conditions",
+                                        e.target.value
+                                          .split(",")
+                                          .map((s) => s.trim())
+                                          .filter(Boolean)
+                                      )
+                                    }
+                                  />
                                 </li>
-                              ))}
+                              ) : (
+                                step.conditions?.map((condition, condIndex) => (
+                                  <li
+                                    key={condIndex}
+                                    className="flex items-start space-x-2 text-sm text-amber-800"
+                                  >
+                                    <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>{condition}</span>
+                                  </li>
+                                ))
+                              )}
                             </ul>
                           </div>
                         )}
@@ -384,8 +686,8 @@ export const OnboardingFlow = () => {
                         Workflow Complete!
                       </h3>
                       <p className="text-muted-foreground">
-                        All {workflow.steps.length} steps have been completed for{' '}
-                        {workflow.country}
+                        All {currentWorkflow?.steps.length} steps have been
+                        completed for {currentWorkflow?.country}
                       </p>
                     </div>
                     <Button className="bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-lg">

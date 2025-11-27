@@ -1,29 +1,46 @@
-import { useState, useEffect } from 'react';
-import { alertsAPI } from '../services/api';
-import { Alert as AlertType } from '../types';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Skeleton } from '../components/ui/skeleton';
-import { Alert, AlertDescription } from '../components/ui/alert';
+import { useState, useEffect } from "react";
+import { alertsAPI } from "../services/api";
+import { Alert as AlertType } from "../types";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Skeleton } from "../components/ui/skeleton";
+import { Alert, AlertDescription } from "../components/ui/alert";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../components/ui/select';
-import { COUNTRIES, SEVERITY_COLORS } from '../utils/constants';
-import { Bell, ExternalLink, CheckCircle, AlertCircle, Filter, RefreshCw, TrendingUp, XCircle } from 'lucide-react';
+} from "../components/ui/select";
+import { SEVERITY_COLORS } from "../utils/constants";
+import { useApp } from "../context/AppContext";
+import {
+  Bell,
+  ExternalLink,
+  CheckCircle,
+  AlertCircle,
+  Filter,
+  RefreshCw,
+  TrendingUp,
+  XCircle,
+} from "lucide-react";
 
 export const Alerts = () => {
+  const { countries } = useApp();
   const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [filteredAlerts, setFilteredAlerts] = useState<AlertType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [countryFilter, setCountryFilter] = useState<string>('all');
-  const [severityFilter, setSeverityFilter] = useState<string>('all');
-  const [showReadFilter, setShowReadFilter] = useState<string>('all');
+  const [error, setError] = useState("");
+  const [countryFilter, setCountryFilter] = useState<string>("all");
+  const [severityFilter, setSeverityFilter] = useState<string>("all");
+  const [showReadFilter, setShowReadFilter] = useState<string>("all");
 
   useEffect(() => {
     loadAlerts();
@@ -35,13 +52,13 @@ export const Alerts = () => {
 
   const loadAlerts = async () => {
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       const data = await alertsAPI.getAlerts();
       setAlerts(data);
     } catch (err) {
-      setError('Failed to load alerts. Please try again.');
+      setError("Failed to load alerts. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -50,17 +67,17 @@ export const Alerts = () => {
   const applyFilters = () => {
     let filtered = [...alerts];
 
-    if (countryFilter !== 'all') {
+    if (countryFilter !== "all") {
       filtered = filtered.filter((alert) => alert.country === countryFilter);
     }
 
-    if (severityFilter !== 'all') {
+    if (severityFilter !== "all") {
       filtered = filtered.filter((alert) => alert.severity === severityFilter);
     }
 
-    if (showReadFilter === 'unread') {
+    if (showReadFilter === "unread") {
       filtered = filtered.filter((alert) => !alert.isRead);
-    } else if (showReadFilter === 'read') {
+    } else if (showReadFilter === "read") {
       filtered = filtered.filter((alert) => alert.isRead);
     }
 
@@ -82,17 +99,17 @@ export const Alerts = () => {
         )
       );
     } catch (err) {
-      console.error('Failed to mark alert as read:', err);
+      console.error("Failed to mark alert as read:", err);
     }
   };
 
   const getSeverityIcon = (severity: string) => {
     switch (severity) {
-      case 'critical':
+      case "critical":
         return <XCircle className="w-5 h-5" />;
-      case 'high':
+      case "high":
         return <AlertCircle className="w-5 h-5" />;
-      case 'medium':
+      case "medium":
         return <TrendingUp className="w-5 h-5" />;
       default:
         return <Bell className="w-5 h-5" />;
@@ -101,19 +118,21 @@ export const Alerts = () => {
 
   const getSeverityGradient = (severity: string) => {
     switch (severity) {
-      case 'critical':
-        return 'from-red-600 to-red-700';
-      case 'high':
-        return 'from-orange-500 to-red-500';
-      case 'medium':
-        return 'from-yellow-500 to-orange-500';
+      case "critical":
+        return "from-red-600 to-red-700";
+      case "high":
+        return "from-orange-500 to-red-500";
+      case "medium":
+        return "from-yellow-500 to-orange-500";
       default:
-        return 'from-blue-500 to-blue-600';
+        return "from-blue-500 to-blue-600";
     }
   };
 
   const unreadCount = alerts.filter((a) => !a.isRead).length;
-  const criticalCount = alerts.filter((a) => a.severity === 'critical' && !a.isRead).length;
+  const criticalCount = alerts.filter(
+    (a) => a.severity === "critical" && !a.isRead
+  ).length;
 
   return (
     <div className="min-h-screen bg-background">
@@ -144,7 +163,9 @@ export const Alerts = () => {
               disabled={isLoading}
               className="bg-gradient-to-r from-primary to-secondary"
             >
-              <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+              <RefreshCw
+                className={`w-4 h-4 mr-2 ${isLoading ? "animate-spin" : ""}`}
+              />
               Refresh
             </Button>
           </div>
@@ -157,7 +178,9 @@ export const Alerts = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-blue-800">Total Alerts</p>
-                  <p className="text-2xl font-bold text-blue-900">{alerts.length}</p>
+                  <p className="text-2xl font-bold text-blue-900">
+                    {alerts.length}
+                  </p>
                 </div>
                 <Bell className="w-8 h-8 text-blue-600" />
               </div>
@@ -168,7 +191,9 @@ export const Alerts = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-red-800">Critical</p>
-                  <p className="text-2xl font-bold text-red-900">{criticalCount}</p>
+                  <p className="text-2xl font-bold text-red-900">
+                    {criticalCount}
+                  </p>
                 </div>
                 <XCircle className="w-8 h-8 text-red-600" />
               </div>
@@ -192,7 +217,9 @@ export const Alerts = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-orange-800">Unread</p>
-                  <p className="text-2xl font-bold text-orange-900">{unreadCount}</p>
+                  <p className="text-2xl font-bold text-orange-900">
+                    {unreadCount}
+                  </p>
                 </div>
                 <AlertCircle className="w-8 h-8 text-orange-600" />
               </div>
@@ -218,7 +245,7 @@ export const Alerts = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Countries</SelectItem>
-                    {COUNTRIES.map((country) => (
+                    {countries.map((country) => (
                       <SelectItem key={country.id} value={country.name}>
                         {country.name}
                       </SelectItem>
@@ -229,7 +256,10 @@ export const Alerts = () => {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium">Severity</label>
-                <Select value={severityFilter} onValueChange={setSeverityFilter}>
+                <Select
+                  value={severityFilter}
+                  onValueChange={setSeverityFilter}
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -245,7 +275,10 @@ export const Alerts = () => {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium">Status</label>
-                <Select value={showReadFilter} onValueChange={setShowReadFilter}>
+                <Select
+                  value={showReadFilter}
+                  onValueChange={setShowReadFilter}
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -288,10 +321,14 @@ export const Alerts = () => {
               <Card
                 key={alert.id}
                 className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${
-                  !alert.isRead ? 'ring-2 ring-accent/20' : ''
+                  !alert.isRead ? "ring-2 ring-accent/20" : ""
                 }`}
               >
-                <div className={`h-2 bg-gradient-to-r ${getSeverityGradient(alert.severity)}`} />
+                <div
+                  className={`h-2 bg-gradient-to-r ${getSeverityGradient(
+                    alert.severity
+                  )}`}
+                />
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -302,7 +339,9 @@ export const Alerts = () => {
                         <Badge className={SEVERITY_COLORS[alert.severity]}>
                           <span className="flex items-center space-x-1">
                             {getSeverityIcon(alert.severity)}
-                            <span className="ml-1">{alert.severity.toUpperCase()}</span>
+                            <span className="ml-1">
+                              {alert.severity.toUpperCase()}
+                            </span>
                           </span>
                         </Badge>
                         {!alert.isRead && (
@@ -311,13 +350,15 @@ export const Alerts = () => {
                           </Badge>
                         )}
                       </div>
-                      <CardTitle className="text-xl mb-2">{alert.title}</CardTitle>
+                      <CardTitle className="text-xl mb-2">
+                        {alert.title}
+                      </CardTitle>
                       <CardDescription className="flex items-center space-x-2">
                         <span>
-                          {new Date(alert.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
+                          {new Date(alert.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
                           })}
                         </span>
                       </CardDescription>
@@ -325,7 +366,9 @@ export const Alerts = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-foreground leading-relaxed">{alert.description}</p>
+                  <p className="text-foreground leading-relaxed">
+                    {alert.description}
+                  </p>
 
                   <div className="flex items-center justify-between pt-4 border-t">
                     <div className="flex items-center space-x-2">
@@ -367,9 +410,11 @@ export const Alerts = () => {
                 No Alerts Found
               </h3>
               <p className="text-muted-foreground">
-                {countryFilter !== 'all' || severityFilter !== 'all' || showReadFilter !== 'all'
-                  ? 'Try adjusting your filters'
-                  : 'No regulatory alerts at this time'}
+                {countryFilter !== "all" ||
+                severityFilter !== "all" ||
+                showReadFilter !== "all"
+                  ? "Try adjusting your filters"
+                  : "No regulatory alerts at this time"}
               </p>
             </CardContent>
           </Card>
