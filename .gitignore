@@ -1,0 +1,47 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+/node_modules
+**/node_modules
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Logs
+logs
+*.log
+pnpm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Build
+dist
+build
+
+# IDEs
+.vscode
+.idea
+
+# Misc
+coverage
+coverage/
+.nyc_output
+
+# Mac
+.Spotlight-V100
+.Trashes
+
+# Windows
+ehthumbs.db
+
+# Monorepo
+**/dist
+**/build
+
+# Ignore local docker-compose override
+docker-compose.override.yml
